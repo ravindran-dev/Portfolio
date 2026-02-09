@@ -5,6 +5,7 @@ import Experience from './sections/Experience';
 import Projects from './sections/Projects';
 import Skills from './sections/Skills';
 import Achievements from './sections/Achievements';
+import GitHubStats from './sections/GitHubStats';
 import Footer from './sections/Footer';
 
 function App() {
@@ -79,7 +80,7 @@ function App() {
             </button>
             
             <div className="hidden md:flex items-center gap-8">
-              {['About', 'Experience', 'Projects', 'Skills', 'Achievements'].map((item) => (
+              {['About', 'Experience', 'Projects', 'Skills', 'GitHub', 'Achievements'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
@@ -140,6 +141,7 @@ function App() {
         <Experience />
         <Projects />
         <Skills />
+        <GitHubStats />
         <Achievements />
       </main>
 
