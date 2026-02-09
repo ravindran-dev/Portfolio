@@ -2,7 +2,7 @@
 
 A modern, responsive developer portfolio built with React and Tailwind CSS, showcasing AI/ML engineering expertise and full-stack development skills.
 
-## 🚀 Features
+## Features
 
 - **Responsive Design**: Fully responsive layout that works seamlessly across all devices
 - **Dark Theme**: Professional dark theme optimized for developer aesthetics
@@ -11,7 +11,7 @@ A modern, responsive developer portfolio built with React and Tailwind CSS, show
 - **Performance**: Optimized with Vite for fast build times and HMR
 - **Reusable Components**: Modular component architecture for easy maintenance
 
-## 📋 Sections
+## Sections
 
 1. **Hero Section**: Introduction with role tagline and call-to-action buttons
 2. **About**: Education background, GPA, and areas of interest
@@ -22,14 +22,14 @@ A modern, responsive developer portfolio built with React and Tailwind CSS, show
 7. **Certifications**: Professional certifications from NPTEL, Cisco, and Udemy
 8. **Footer**: Social links and contact information
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Framework**: React 18
 - **Styling**: Tailwind CSS 3
 - **Build Tool**: Vite
 - **Language**: JavaScript (JSX)
 
-## 📦 Installation
+## Installation
 
 1. **Clone the repository**
    ```bash
@@ -57,7 +57,7 @@ A modern, responsive developer portfolio built with React and Tailwind CSS, show
    npm run preview
    ```
 
-## 🎨 Customization
+## Customization
 
 ### Colors
 Edit the color scheme in `tailwind.config.js`:
@@ -85,7 +85,7 @@ Update your personal information in the respective section files:
 - `src/sections/Skills.jsx` - Technical skills
 - `src/sections/Achievements.jsx` - Achievements and certifications
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 Portfolio/
@@ -114,7 +114,7 @@ Portfolio/
 └── postcss.config.js
 ```
 
-## 🌐 Deployment
+## Deployment
 
 ### Vercel
 ```bash
@@ -134,25 +134,25 @@ npm run build
 # Push the 'dist' folder to gh-pages branch
 ```
 
-## 📱 Browser Support
+## Browser Support
 
 - Chrome (latest)
 - Firefox (latest)
 - Safari (latest)
 - Edge (latest)
 
-## 📄 License
+## License
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## 👤 Author
+## Author
 
 **Ravindran S**
 - GitHub: [@ravindran-dev](https://github.com/ravindran-dev)
 - LinkedIn: [ravindran-dev](https://linkedin.com/in/ravindran-dev)
 - Email: ravindran@example.com
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Built with React and Tailwind CSS
 - Icons from Heroicons
