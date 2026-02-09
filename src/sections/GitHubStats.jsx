@@ -19,7 +19,7 @@ const GitHubStats = () => {
         
         <div className="grid grid-cols-1 gap-5 mt-12">
           {/* GitHub Streak Stats */}
-          <div className="bg-white/5 dark:bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-gray-300 dark:border-white/10 hover:shadow-lg transition-all duration-300">
+          <div className="bg-white/5 dark:bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-gray-300 dark:border-white/10 card-glow card-glow-hover">
             <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-3">🔥 Contribution Streak</h3>
             {!imageErrors.streak ? (
               <>
@@ -46,7 +46,7 @@ const GitHubStats = () => {
           </div>
 
           {/* Activity Graph */}
-          <div className="bg-white/5 dark:bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-gray-300 dark:border-white/10 hover:shadow-lg transition-all duration-300">
+          <div className="bg-white/5 dark:bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-gray-300 dark:border-white/10 card-glow card-glow-hover">
             <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-3">📈 Contribution Activity</h3>
             {!imageErrors.activity ? (
               <img 
