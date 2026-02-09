@@ -1,7 +1,12 @@
-# Ravindran S - Portfolio Website
+<p align="center">
+  <img src="https://img.shields.io/badge/Ravindran S%20-Portfolio-blueviolet?style=for-the-badge" />
+</p>
 
 A modern, responsive developer portfolio built with React and Tailwind CSS, showcasing AI/ML engineering expertise and full-stack development skills.
+> Simple. Clean. Developer-first.
 
+**Live Demo**  
+👉 https://portfolio-ravindrans.vercel.app/
 ## Features
 
 - **Responsive Design**: Fully responsive layout that works seamlessly across all devices
@@ -125,13 +130,13 @@ vercel
 ### Netlify
 ```bash
 npm run build
-# Deploy the 'dist' folder
+
 ```
 
 ### GitHub Pages
 ```bash
 npm run build
-# Push the 'dist' folder to gh-pages branch
+
 ```
 
 ## Browser Support
@@ -141,16 +146,13 @@ npm run build
 - Safari (latest)
 - Edge (latest)
 
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
 
 ## Author
 
 **Ravindran S**
 - GitHub: [@ravindran-dev](https://github.com/ravindran-dev)
-- LinkedIn: [ravindran-dev](https://linkedin.com/in/ravindran-dev)
-- Email: ravindran@example.com
+- LinkedIn: [ravindran-dev](www.linkedin.com/in/ravindran-s)
+- Email: ravindrans.dev@gmail.com
 
 ## Acknowledgments
 
