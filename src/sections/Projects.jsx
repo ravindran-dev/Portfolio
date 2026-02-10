@@ -1,6 +1,7 @@
 import React from 'react';
 import SectionTitle from '../components/SectionTitle';
 import ProjectCard from '../components/ProjectCard';
+import FadeInSection from '../components/FadeInSection';
 
 const Projects = () => {
   const projects = [
@@ -57,13 +58,17 @@ const Projects = () => {
   return (
     <section id="projects" className="py-20 px-4 bg-white dark:bg-dark-card/30">
       <div className="max-w-6xl mx-auto">
-        <SectionTitle subtitle="Innovative solutions and experiments">
-          Featured Projects
-        </SectionTitle>
+        <FadeInSection>
+          <SectionTitle subtitle="Innovative solutions and experiments">
+            Featured Projects
+          </SectionTitle>
+        </FadeInSection>
         
         <div className="grid md:grid-cols-2 gap-6">
           {projects.map((project, index) => (
-            <ProjectCard key={index} {...project} />
+            <FadeInSection key={index} delay={index * 0.1}>
+              <ProjectCard {...project} />
+            </FadeInSection>
           ))}
         </div>
       </div>

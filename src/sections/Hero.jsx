@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import Button from '../components/Button';
 
 const Hero = () => {
@@ -9,25 +10,49 @@ const Hero = () => {
   return (
     <section className="min-h-screen flex items-center justify-center px-4 py-20 relative overflow-hidden">
       {/* Animated background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-accent-primary/5 via-transparent to-accent-secondary/5 animate-pulse"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-neon-blue/10 via-neon-purple/5 to-neon-pink/10"></div>
       
       <div className="max-w-5xl mx-auto text-center relative z-10">
-        <div className="animate-fade-in">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-slide-up">
-            Hi, I'm <span className="text-gradient">Ravindran S</span>
-          </h1>
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1.0] }}
+        >
+          <motion.h1 
+            className="text-6xl md:text-8xl font-bold mb-6"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
+          >
+            Hi, I'm <span className="text-neon-gradient drop-shadow-[0_0_30px_rgba(59,130,246,0.5)]">Ravindran S</span>
+          </motion.h1>
           
-          <p className="text-2xl md:text-3xl text-gray-700 dark:text-gray-300 mb-8 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-            AI/ML Engineer | Systems & Full-Stack Developer
-          </p>
+          <motion.p 
+            className="text-2xl md:text-4xl text-gray-700 dark:text-gray-200 mb-8 font-medium"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            AI/ML Engineer | <span className="text-accent-primary">Systems</span> & <span className="text-accent-secondary">Full-Stack</span> Developer
+          </motion.p>
           
-          <p className="text-lg md:text-xl text-gray-700 dark:text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed animate-slide-up" style={{ animationDelay: '0.2s' }}>
-            Passionate about building intelligent systems with AI/ML, computer vision, and IoT. 
+          <motion.p 
+            className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.6 }}
+          >
+            Passionate about building <span className="text-neon-gradient font-semibold">intelligent systems</span> with AI/ML, computer vision, and IoT. 
             Focused on low-latency inference, distributed systems, and contributing to open-source projects 
-            that make a difference in sustainability and technology.
-          </p>
+            that make a difference.
+          </motion.p>
           
-          <div className="flex flex-wrap gap-4 justify-center items-center animate-slide-up" style={{ animationDelay: '0.3s' }}>
+          <motion.div 
+            className="flex flex-wrap gap-4 justify-center items-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
             <Button 
               variant="primary" 
               onClick={() => scrollToSection('projects')}
@@ -57,16 +82,20 @@ const Hero = () => {
               </svg>
               GitHub
             </Button>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
       
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <svg className="w-6 h-6 text-gray-400 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <motion.div 
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      >
+        <svg className="w-6 h-6 text-neon-blue dark:text-neon-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
         </svg>
-      </div>
+      </motion.div>
     </section>
   );
 };

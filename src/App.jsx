@@ -7,6 +7,7 @@ import Skills from './sections/Skills';
 import Achievements from './sections/Achievements';
 import GitHubStats from './sections/GitHubStats';
 import Footer from './sections/Footer';
+import AnimatedBackground from './components/AnimatedBackground';
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -19,8 +20,22 @@ function App() {
   });
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Check if device is mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768 || 'ontouchstart' in window);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return; // Skip cursor tracking on mobile
+    
     const handleMouseMove = (e) => {
       setCursorPosition({ x: e.clientX, y: e.clientY });
       
@@ -32,7 +47,7 @@ function App() {
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,7 +80,10 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-dark-bg text-gray-900 dark:text-white transition-colors duration-300">
+    <div className="min-h-screen bg-gray-50 dark:bg-dark-bg text-gray-900 dark:text-white transition-colors duration-300 relative">
+      {/* Animated 3D Background */}
+      <AnimatedBackground />
+      
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? 'bg-white dark:bg-dark-card/95 backdrop-blur-md border-b border-gray-200 dark:border-dark-border shadow-lg' : 'bg-transparent'
@@ -148,15 +166,17 @@ function App() {
       {/* Footer */}
       <Footer />
       
-      {/* Custom Cursor Glow */}
-      <div 
-        className={`cursor-glow ${isHovering ? 'hover' : ''}`}
-        style={{
-          left: `${cursorPosition.x}px`,
-          top: `${cursorPosition.y}px`,
-          transform: 'translate(-50%, -50%)'
-        }}
-      />
+      {/* Custom Cursor Glow - Hidden on mobile */}
+      {!isMobile && (
+        <div 
+          className={`cursor-glow ${isHovering ? 'hover' : ''}`}
+          style={{
+            left: `${cursorPosition.x}px`,
+            top: `${cursorPosition.y}px`,
+            transform: 'translate(-50%, -50%)'
+          }}
+        />
+      )}
     </div>
   );
 }

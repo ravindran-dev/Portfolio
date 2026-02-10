@@ -1,12 +1,25 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const ProjectCard = ({ title, description, tech, metrics, link, github }) => {
   return (
-    <div className="bg-white dark:bg-dark-card border border-gray-200 dark:border-dark-border rounded-xl p-6 hover:border-accent-primary transition-all duration-300 animate-slide-up group card-glow-secondary card-glow-hover">
-      <div className="flex justify-between items-start mb-4">
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-accent-primary transition-colors">
-          {title}
-        </h3>
+    <motion.div 
+      className="glassmorphism rounded-2xl p-6 group relative overflow-hidden"
+      whileHover={{ y: -8, scale: 1.02 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+    >
+      {/* Animated gradient border effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"></div>
+      
+      <div className="relative z-10">
+        <div className="flex justify-between items-start mb-4">
+          <motion.h3 
+            className="text-2xl font-bold text-gray-900 dark:text-white"
+            whileHover={{ x: 5 }}
+            transition={{ type: 'spring', stiffness: 400 }}
+          >
+            <span className="group-hover:text-neon-gradient transition-all duration-300">{title}</span>
+          </motion.h3>
         <div className="flex gap-3">
           {github && (
             <a 
@@ -37,34 +50,39 @@ const ProjectCard = ({ title, description, tech, metrics, link, github }) => {
         </div>
       </div>
       
-      <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+      <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
         {description}
       </p>
       
       {metrics && (
         <div className="mb-4 flex flex-wrap gap-3">
           {metrics.map((metric, index) => (
-            <span 
+            <motion.span 
               key={index} 
-              className="bg-accent-primary/10 text-accent-primary px-3 py-1 rounded-full text-sm font-semibold border border-accent-primary/30"
+              className="bg-gradient-to-r from-neon-blue/20 to-neon-purple/20 text-neon-blue dark:text-neon-cyan px-4 py-1.5 rounded-full text-sm font-semibold neon-border"
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: 'spring', stiffness: 400 }}
             >
               {metric}
-            </span>
+            </motion.span>
           ))}
         </div>
       )}
       
       <div className="flex flex-wrap gap-2">
         {tech.map((item, index) => (
-          <span 
+          <motion.span 
             key={index} 
-            className="bg-gray-100 dark:bg-dark-hover text-gray-700 dark:text-gray-300 px-3 py-1 rounded-md text-sm border border-gray-300 dark:border-dark-border"
+            className="px-3 py-1.5 bg-white/5 dark:bg-white/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-white/20 hover:border-neon-blue dark:hover:border-neon-cyan transition-colors"
+            whileHover={{ scale: 1.05, y: -2 }}
+            transition={{ type: 'spring', stiffness: 400 }}
           >
             {item}
-          </span>
+          </motion.span>
         ))}
       </div>
-    </div>
+      </div>
+    </motion.div>
   );
 };
 

@@ -7,6 +7,9 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
+      },
       colors: {
         dark: {
           bg: '#0a0a0a',
@@ -17,6 +20,14 @@ export default {
         accent: {
           primary: '#3b82f6',
           secondary: '#8b5cf6',
+          pink: '#ec4899',
+          cyan: '#06b6d4',
+        },
+        neon: {
+          blue: '#00d4ff',
+          purple: '#a855f7',
+          pink: '#ff006e',
+          cyan: '#00ffff',
         }
       },
       animation: {
