@@ -9,6 +9,7 @@
   
   body {
     @apply font-sans antialiased transition-colors duration-300;
+    cursor: none;
   }
   
   html.dark body {
@@ -20,8 +21,69 @@
     @apply bg-gray-50 text-gray-900;
   }
   
-  button, a, input, textarea, select {
-    cursor: pointer;
+  /* Hide custom cursor on mobile/touch devices */
+  @media (hover: none) and (pointer: coarse) {
+    body {
+      cursor: auto !important;
+    }
+    body::before,
+    body::after {
+      display: none !important;
+    }
+  }
+
+  .neon-cursor-dot {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    transition: width 0.15s ease, height 0.15s ease;
+  }
+  
+  html.dark .neon-cursor-dot {
+    background: #00d4ff;
+    box-shadow: 0 0 20px #00d4ff,
+                0 0 40px #00d4ff,
+                0 0 60px rgba(0, 212, 255, 0.5);
+  }
+  
+  html:not(.dark) .neon-cursor-dot {
+    background: #3b82f6;
+    box-shadow: 0 0 15px #3b82f6,
+                0 0 30px #3b82f6,
+                0 0 45px rgba(59, 130, 246, 0.4);
+  }
+  
+  .neon-cursor-dot.hover {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .neon-cursor-outline {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s ease, height 0.2s ease;
+  }
+  
+  html.dark .neon-cursor-outline {
+    border: 2px solid rgba(0, 212, 255, 0.5);
+  }
+  
+  html:not(.dark) .neon-cursor-outline {
+    border: 2px solid rgba(59, 130, 246, 0.5);
+  }
+  
+  .neon-cursor-outline.hover {
+    width: 60px;
+    height: 60px;
   }
 }
 
@@ -65,48 +127,6 @@
     border: 1px solid rgba(59, 130, 246, 0.5);
     box-shadow: 0 0 10px rgba(59, 130, 246, 0.3),
                 inset 0 0 10px rgba(59, 130, 246, 0.1);
-  }
-  
-  .cursor-glow {
-    position: fixed;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transition: width 0.2s ease, height 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  html.dark .cursor-glow {
-    background: radial-gradient(circle, rgba(80, 147, 255, 0.8) 0%, rgba(187, 158, 255, 0.5) 50%, transparent 70%);
-    mix-blend-mode: screen;
-    box-shadow: 0 0 30px rgba(80, 147, 255, 0.6),
-                0 0 60px rgba(187, 158, 255, 0.4);
-  }
-
-  html:not(.dark) .cursor-glow {
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, rgba(139, 92, 246, 0.3) 50%, transparent 70%);
-    box-shadow: 0 0 25px rgba(59, 130, 246, 0.5),
-                0 0 50px rgba(139, 92, 246, 0.3);
-  }
-  
-  .cursor-glow.hover {
-    width: 50px;
-    height: 50px;
-  }
-
-  html.dark .cursor-glow.hover {
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.9) 0%, rgba(139, 92, 246, 0.7) 50%, transparent 70%);
-    box-shadow: 0 0 40px rgba(59, 130, 246, 0.8),
-                0 0 80px rgba(139, 92, 246, 0.6),
-                0 0 120px rgba(139, 92, 246, 0.3);
-  }
-
-  html:not(.dark) .cursor-glow.hover {
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.6) 0%, rgba(139, 92, 246, 0.5) 50%, transparent 70%);
-    box-shadow: 0 0 35px rgba(59, 130, 246, 0.7),
-                0 0 70px rgba(139, 92, 246, 0.5),
-                0 0 100px rgba(139, 92, 246, 0.3);
   }
   
   .card-glow {

@@ -8,6 +8,7 @@ import Achievements from './sections/Achievements';
 import GitHubStats from './sections/GitHubStats';
 import Footer from './sections/Footer';
 import AnimatedBackground from './components/AnimatedBackground';
+import NeonCursor from './components/NeonCursor';
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -16,38 +17,8 @@ function App() {
     if (savedTheme) {
       return savedTheme === 'dark';
     }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return true; // Default to dark mode
   });
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    // Check if device is mobile
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768 || 'ontouchstart' in window);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  useEffect(() => {
-    if (isMobile) return; // Skip cursor tracking on mobile
-    
-    const handleMouseMove = (e) => {
-      setCursorPosition({ x: e.clientX, y: e.clientY });
-      
-      // Check if hovering over interactive elements
-      const target = e.target;
-      const isInteractive = target.closest('button, a, input, textarea, select, [role="button"]');
-      setIsHovering(!!isInteractive);
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [isMobile]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -166,17 +137,8 @@ function App() {
       {/* Footer */}
       <Footer />
       
-      {/* Custom Cursor Glow - Hidden on mobile */}
-      {!isMobile && (
-        <div 
-          className={`cursor-glow ${isHovering ? 'hover' : ''}`}
-          style={{
-            left: `${cursorPosition.x}px`,
-            top: `${cursorPosition.y}px`,
-            transform: 'translate(-50%, -50%)'
-          }}
-        />
-      )}
+      {/* Neon Cursor */}
+      <NeonCursor />
     </div>
   );
 }
