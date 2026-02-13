@@ -22,22 +22,13 @@ const GitHubStats = () => {
           <div className="bg-white/5 dark:bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-gray-300 dark:border-white/10 card-glow card-glow-hover">
             <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-3">🔥 Contribution Streak</h3>
             {!imageErrors.streak ? (
-              <>
-                <img 
-                  src={`https://streak-stats.demolab.com/?user=${username}&theme=default&hide_border=false&border=E5E7EB&background=FFFFFF&stroke=3b82f6&ring=3b82f6&fire=8b5cf6&currStreakNum=1f2937&sideNums=1f2937&currStreakLabel=1f2937&sideLabels=6b7280&dates=6b7280`}
-                  alt="GitHub Streak"
-                  className="w-full rounded-lg dark:hidden"
-                  onError={() => handleImageError('streak')}
-                  loading="lazy"
-                />
-                <img 
-                  src={`https://streak-stats.demolab.com/?user=${username}&theme=dark&hide_border=false&border=1f2937&background=0a0a0a&ring=3b82f6&fire=8b5cf6&currStreakLabel=ffffff&currStreakNum=ffffff&sideNums=ffffff&sideLabels=ffffff&dates=ffffff&stroke=ffffff`}
-                  alt="GitHub Streak"
-                  className="w-full rounded-lg hidden dark:block"
-                  onError={() => handleImageError('streak')}
-                  loading="lazy"
-                />
-              </>
+              <img 
+                src="https://github-readme-streak-stats-eight.vercel.app?user=ravindran-dev&theme=github-dark&ring=bf91f3&fire=bf91f3&currStreakLabel=bf91f3&sideNums=bf91f3&sideLabels=bf91f3&dates=ffffff&hide_border=true"
+                alt="GitHub Streak"
+                className="w-full rounded-lg"
+                onError={() => handleImageError('streak')}
+                loading="lazy"
+              />
             ) : (
               <div className="text-center py-6 text-gray-400">
                 <p>Loading streak...</p>
