@@ -203,32 +203,32 @@ Active open-source contributor and Linux enthusiast.`,
   }, [output, currentCommand]);
 
   const Prompt = ({ showInput = false, typingCommand = '' }) => (
-    <div className="flex items-center gap-3 flex-wrap mb-2">
-      <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-sm">
-        <i className="fa-brands fa-linux text-cyan-400" style={{ textShadow: '0 0 10px rgba(34, 211, 238, 0.6)' }}></i>
+    <div className="flex items-center gap-1.5 sm:gap-3 flex-wrap mb-2">
+      <span className="inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-xs sm:text-sm">
+        <i className="fa-brands fa-linux text-cyan-400 text-xs sm:text-sm" style={{ textShadow: '0 0 10px rgba(34, 211, 238, 0.6)' }}></i>
         <span className="text-cyan-400 font-semibold">Arch</span>
       </span>
-      <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-sm">
-        <i className="fa-regular fa-clock text-purple-400" style={{ textShadow: '0 0 10px rgba(192, 132, 252, 0.6)' }}></i>
+      <span className="inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-xs sm:text-sm">
+        <i className="fa-regular fa-clock text-purple-400 text-xs sm:text-sm" style={{ textShadow: '0 0 10px rgba(192, 132, 252, 0.6)' }}></i>
         <span className="text-purple-400">{getTime()}</span>
       </span>
-      <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-sm">
-        <i className="fa-solid fa-user text-green-400" style={{ textShadow: '0 0 10px rgba(74, 222, 128, 0.6)' }}></i>
+      <span className="inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-xs sm:text-sm">
+        <i className="fa-solid fa-user text-green-400 text-xs sm:text-sm" style={{ textShadow: '0 0 10px rgba(74, 222, 128, 0.6)' }}></i>
         <span className="text-green-400">ravindran@s</span>
       </span>
-      <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-sm">
-        <i className="fa-solid fa-folder text-yellow-400" style={{ textShadow: '0 0 10px rgba(250, 204, 21, 0.6)' }}></i>
+      <span className="inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-xs sm:text-sm">
+        <i className="fa-solid fa-folder text-yellow-400 text-xs sm:text-sm" style={{ textShadow: '0 0 10px rgba(250, 204, 21, 0.6)' }}></i>
         <span className="text-yellow-400">~</span>
       </span>
-      <span className="text-pink-500 font-bold text-lg ml-1" style={{ textShadow: '0 0 12px rgba(236, 72, 153, 0.8)' }}>❯</span>
+      <span className="text-pink-500 font-bold text-base sm:text-lg ml-0.5 sm:ml-1" style={{ textShadow: '0 0 12px rgba(236, 72, 153, 0.8)' }}>❯</span>
       {showInput && (
-        <span className="text-white ml-2">{typingCommand}</span>
+        <span className="text-white ml-1 sm:ml-2 text-xs sm:text-sm">{typingCommand}</span>
       )}
     </div>
   );
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 py-24">
+    <section className="min-h-screen flex items-center justify-center px-2 sm:px-4 py-20 sm:py-24">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -249,13 +249,13 @@ Active open-source contributor and Linux enthusiast.`,
           />
 
           {/* Terminal Header */}
-          <div className="terminal-header bg-black/80 backdrop-blur-sm px-5 py-3 flex items-center gap-2 border-b border-cyan-500/20 relative">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-red-500"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+          <div className="terminal-header bg-black/80 backdrop-blur-sm px-3 sm:px-5 py-2 sm:py-3 flex items-center gap-2 border-b border-cyan-500/20 relative">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <div className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-red-500"></div>
+              <div className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-yellow-500"></div>
+              <div className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-green-500"></div>
             </div>
-            <span className="ml-3 text-white/90 text-sm font-medium">Ravindran S ~ Workspace</span>
+            <span className="ml-2 sm:ml-3 text-white/90 text-xs sm:text-sm font-medium truncate">Ravindran S ~ Workspace</span>
             
             {/* Decorative line */}
             <div className="absolute bottom-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-cyan-500/60 to-transparent"></div>
@@ -264,7 +264,7 @@ Active open-source contributor and Linux enthusiast.`,
           {/* Terminal Content */}
           <div 
             ref={terminalRef}
-            className="terminal-content bg-black p-6 font-mono text-sm overflow-y-auto"
+            className="terminal-content bg-black p-3 sm:p-6 font-mono text-xs sm:text-sm overflow-y-auto"
             style={{ 
               height: '70vh',
               maxHeight: '600px',
@@ -273,28 +273,28 @@ Active open-source contributor and Linux enthusiast.`,
             onClick={() => !isAnimating && inputRef.current?.focus()}
           >
             {output.map((item, index) => (
-              <div key={index} className="mb-4">
+              <div key={index} className="mb-3 sm:mb-4">
                 {item.type === 'command' && (
                   <>
                     <Prompt />
-                    <div className="text-white ml-2 mb-2">{item.content}</div>
+                    <div className="text-white ml-1 sm:ml-2 mb-1.5 sm:mb-2 text-xs sm:text-sm">{item.content}</div>
                   </>
                 )}
                 {item.type === 'output' && (
-                  <pre className="text-gray-300 ml-6 whitespace-pre-wrap font-mono text-sm leading-relaxed">
+                  <pre className="text-gray-300 ml-3 sm:ml-6 whitespace-pre-wrap font-mono text-xs sm:text-sm leading-relaxed">
                     {item.content}
                   </pre>
                 )}
                 {item.type === 'error' && (
-                  <div className="text-red-400 ml-6 mb-2">{item.content}</div>
+                  <div className="text-red-400 ml-3 sm:ml-6 mb-1.5 sm:mb-2 text-xs sm:text-sm">{item.content}</div>
                 )}
                 {item.type === 'contact' && (
-                  <div className="ml-6 mb-2 flex flex-wrap gap-4">
+                  <div className="ml-3 sm:ml-6 mb-1.5 sm:mb-2 flex flex-wrap gap-2 sm:gap-4">
                     <a 
                       href="https://docs.google.com/document/d/1rAVuu7cZYGYkGqxK24-MLWHf3SxamPqXdVYZm1or89w/edit?usp=sharing"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-cyan-400 hover:text-cyan-300 transition-all font-semibold"
+                      className="text-cyan-400 hover:text-cyan-300 transition-all font-semibold text-xs sm:text-sm"
                       style={{ textShadow: '0 0 8px rgba(34, 211, 238, 0.6)' }}
                     >
                       📄 Resume
@@ -303,7 +303,7 @@ Active open-source contributor and Linux enthusiast.`,
                       href="https://github.com/ravindran-dev"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-cyan-400 hover:text-cyan-300 transition-all font-semibold"
+                      className="text-cyan-400 hover:text-cyan-300 transition-all font-semibold text-xs sm:text-sm"
                       style={{ textShadow: '0 0 8px rgba(34, 211, 238, 0.6)' }}
                     >
                       💻 GitHub
@@ -312,7 +312,7 @@ Active open-source contributor and Linux enthusiast.`,
                       href="https://www.linkedin.com/in/ravindran-s-982702327/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-cyan-400 hover:text-cyan-300 transition-all font-semibold"
+                      className="text-cyan-400 hover:text-cyan-300 transition-all font-semibold text-xs sm:text-sm"
                       style={{ textShadow: '0 0 8px rgba(34, 211, 238, 0.6)' }}
                     >
                       🔗 LinkedIn

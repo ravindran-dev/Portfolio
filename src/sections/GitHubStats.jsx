@@ -10,12 +10,11 @@ const GitHubStats = () => {
   };
 
   return (
-    <section id="github" className="py-20 px-4">
+    <section id="github" className="py-20 px-4 bg-white dark:bg-dark-card/30">
       <div className="max-w-6xl mx-auto">
-        <SectionTitle 
-          title="GitHub Achievements" 
-          subtitle="Contributions and coding statistics"
-        />
+        <SectionTitle subtitle="GitHub Stats">
+          GitHub Achievements
+        </SectionTitle>
         
         <div className="grid grid-cols-1 gap-5 mt-12">
           {/* GitHub Streak Stats */}

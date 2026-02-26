@@ -233,7 +233,7 @@ function App() {
         <AnimatedBackground />
         <Navigation isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
         
-        <main>
+        <main className="pt-20 sm:pt-24">
           <Routes>
             <Route path="/" element={<Hero />} />
             <Route path="/about" element={<About />} />

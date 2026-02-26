@@ -1,14 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 
 const Hero = () => {
-  const scrollToSection = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const navigate = useNavigate();
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 py-20 relative overflow-hidden">
+    <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 py-20 sm:py-24 relative overflow-hidden">
       {/* Animated background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-neon-blue/10 via-neon-purple/5 to-neon-pink/10"></div>
       
@@ -19,7 +18,7 @@ const Hero = () => {
           transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1.0] }}
         >
           <motion.h1 
-            className="text-6xl md:text-8xl font-bold mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-4 sm:mb-6 leading-tight"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
@@ -28,7 +27,7 @@ const Hero = () => {
           </motion.h1>
           
           <motion.p 
-            className="text-2xl md:text-4xl text-gray-700 dark:text-gray-200 mb-8 font-medium"
+            className="text-lg sm:text-xl md:text-2xl lg:text-4xl text-gray-700 dark:text-gray-200 mb-6 sm:mb-8 font-medium px-2"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -37,7 +36,7 @@ const Hero = () => {
           </motion.p>
           
           <motion.p 
-            className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed"
+            className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 dark:text-gray-300 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.6 }}
@@ -48,14 +47,14 @@ const Hero = () => {
           </motion.p>
           
           <motion.div 
-            className="flex flex-wrap gap-4 justify-center items-center"
+            className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center items-center px-2"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
             <Button 
               variant="primary" 
-              onClick={() => scrollToSection('projects')}
+              onClick={() => navigate('/projects')}
             >
               View Projects
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
