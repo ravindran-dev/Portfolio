@@ -5,7 +5,7 @@ const Achievements = () => {
   const achievements = [
     {
       title: 'LeetCode Knight',
-      description: 'Rating: 1869',
+      description: 'Rating: 1905',
       highlight: 'Top Competitive Programmer'
     },
     {
@@ -16,6 +16,11 @@ const Achievements = () => {
   ];
 
   const hackathons = [
+    {
+      title: 'AI for Sustainability Hackathon',
+      status: 'Winner',
+      description: 'Awarded $125 + Amazon vouchers worth 300 AED'
+    },
     {
       title: 'TI Forge Hackathon',
       status: 'Winner',

@@ -22,13 +22,24 @@ const GitHubStats = () => {
           <div className="bg-white/5 dark:bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-gray-300 dark:border-white/10 card-glow card-glow-hover">
             <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-3">🔥 Contribution Streak</h3>
             {!imageErrors.streak ? (
-              <img 
-                src="https://github-readme-streak-stats-eight.vercel.app?user=ravindran-dev&theme=github-dark&ring=bf91f3&fire=bf91f3&currStreakLabel=bf91f3&sideNums=bf91f3&sideLabels=bf91f3&dates=ffffff&hide_border=true"
-                alt="GitHub Streak"
-                className="w-full rounded-lg"
-                onError={() => handleImageError('streak')}
-                loading="lazy"
-              />
+              <>
+                {/* Light mode streak */}
+                <img 
+                  src="https://github-readme-streak-stats-eight.vercel.app?user=ravindran-dev&theme=default&hide_border=true&background=F9FAFB&stroke=3b82f6&ring=8b5cf6&fire=ec4899&currStreakNum=111827&sideNums=111827&currStreakLabel=3b82f6&sideLabels=6b7280&dates=9ca3af"
+                  alt="GitHub Streak"
+                  className="w-full rounded-lg block dark:hidden"
+                  onError={() => handleImageError('streak')}
+                  loading="lazy"
+                />
+                {/* Dark mode streak */}
+                <img 
+                  src="https://github-readme-streak-stats-eight.vercel.app?user=ravindran-dev&theme=dark&hide_border=true&background=0F172A&stroke=3b82f6&ring=8b5cf6&fire=ec4899&currStreakNum=ffffff&sideNums=ffffff&currStreakLabel=8b5cf6&sideLabels=d1d5db&dates=9ca3af"
+                  alt="GitHub Streak"
+                  className="w-full rounded-lg hidden dark:block"
+                  onError={() => handleImageError('streak')}
+                  loading="lazy"
+                />
+              </>
             ) : (
               <div className="text-center py-6 text-gray-400">
                 <p>Loading streak...</p>
