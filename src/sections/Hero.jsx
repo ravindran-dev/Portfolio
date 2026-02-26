@@ -65,7 +65,7 @@ const Hero = () => {
             
             <Button 
               variant="secondary"
-              href="https://drive.google.com/file/d/180ijolULD0g4WwWYbS8kCGgDWPUT_WOY/view?usp=sharing"
+              href="https://docs.google.com/document/d/1rAVuu7cZYGYkGqxK24-MLWHf3SxamPqXdVYZm1or89w/edit?usp=sharing"
             >
               Download Resume
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
