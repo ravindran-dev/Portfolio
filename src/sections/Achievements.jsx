@@ -71,7 +71,7 @@ const Achievements = () => {
   ];
 
   return (
-    <section id="achievements" className="py-20 px-4 bg-white dark:bg-dark-card/30">
+    <section id="achievements" className="px-4 py-16 text-slate-100 sm:py-20">
       <div className="max-w-6xl mx-auto">
         <SectionTitle subtitle="Recognition and credentials">
           Achievements & Certifications
@@ -79,26 +79,26 @@ const Achievements = () => {
         
         {/* Achievements */}
         <div className="mb-16">
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+          <h3 className="mb-6 flex items-center gap-3 text-xl font-bold text-white sm:text-2xl">
             <svg className="w-7 h-7 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
             </svg>
             Key Achievements
           </h3>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid gap-5 md:grid-cols-3 md:gap-6">
             {achievements.map((achievement, index) => (
               <div 
                 key={index}
-                className="bg-white dark:bg-dark-card border border-gray-200 dark:border-dark-border rounded-xl p-6 hover:border-accent-primary transition-all duration-300 hover:shadow-xl hover:shadow-accent-primary/10 animate-slide-up group card-glow-primary card-glow-hover"
+                className="glass-panel rounded-xl p-6 animate-slide-up group"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-accent-primary transition-colors">
+                <h4 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-200 transition-colors">
                   {achievement.title}
                 </h4>
                 <p className="text-2xl font-bold text-accent-primary mb-2">
                   {achievement.description}
                 </p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-slate-300">
                   {achievement.highlight}
                 </p>
               </div>
@@ -108,19 +108,17 @@ const Achievements = () => {
 
         {/* Hackathons */}
         <div className="mb-16">
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+          <h3 className="mb-6 flex items-center gap-3 text-xl font-bold text-white sm:text-2xl">
             <svg className="w-7 h-7 text-accent-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
             Hackathon Achievements
           </h3>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid gap-5 md:grid-cols-3 md:gap-6">
             {hackathons.map((hackathon, index) => (
               <div 
                 key={index}
-                className={`bg-white dark:bg-dark-card border border-gray-200 dark:border-dark-border rounded-xl p-6 hover:border-accent-primary transition-all duration-300 hover:shadow-xl hover:shadow-accent-primary/10 animate-slide-up group card-glow-hover ${
-                  hackathon.status === 'Winner' ? 'card-glow-success' : 'card-glow-primary'
-                }`}
+                className="glass-panel rounded-xl p-6 animate-slide-up group"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="mb-3">
@@ -132,10 +130,10 @@ const Achievements = () => {
                     {hackathon.status}
                   </span>
                 </div>
-                <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-accent-primary transition-colors">
+                <h4 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-200 transition-colors">
                   {hackathon.title}
                 </h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-slate-300">
                   {hackathon.description}
                 </p>
               </div>
@@ -145,7 +143,7 @@ const Achievements = () => {
 
         {/* Certifications */}
         <div>
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+          <h3 className="mb-6 flex items-center gap-3 text-xl font-bold text-white sm:text-2xl">
             <svg className="w-7 h-7 text-accent-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
@@ -155,14 +153,14 @@ const Achievements = () => {
             {certifications.map((cert, index) => (
               <div 
                 key={index}
-                className="bg-white/80 dark:bg-dark-card backdrop-blur-sm border border-gray-200 dark:border-dark-border rounded-lg p-5 hover:border-accent-secondary transition-all duration-300 animate-slide-up group card-glow-secondary card-glow-hover"
+                className="glass-panel rounded-lg p-5 animate-slide-up group"
                 style={{ animationDelay: `${index * 0.05}s` }}
               >
                 <div>
-                  <h4 className="font-semibold text-gray-900 dark:text-white mb-1 group-hover:text-accent-secondary transition-colors">
+                  <h4 className="font-semibold text-white mb-1 group-hover:text-cyan-200 transition-colors">
                     {cert.title}
                   </h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-slate-300">
                     {cert.issuer}
                     {cert.score && ` • ${cert.score}`}
                   </p>

@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 import Hero from './sections/Hero';
 import About from './sections/About';
 import Experience from './sections/Experience';
 import Projects from './sections/Projects';
 import Skills from './sections/Skills';
 import Achievements from './sections/Achievements';
-import GitHubStats from './sections/GitHubStats';
 import Workspace from './sections/Workspace';
 import Footer from './sections/Footer';
 import AnimatedBackground from './components/AnimatedBackground';
 import NeonCursor from './components/NeonCursor';
+import Loader from './components/Loader';
+import { useLoader } from './hooks/useLoader';
 
-function Navigation({ isDarkMode, toggleTheme }) {
+function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
@@ -37,20 +39,20 @@ function Navigation({ isDarkMode, toggleTheme }) {
     { name: 'Projects', path: '/projects' },
     { name: 'Skills', path: '/skills' },
     { name: 'Workspace', path: '/workspace' },
-    { name: 'GitHub', path: '/github' },
     { name: 'Achievements', path: '/achievements' },
   ];
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/90 dark:bg-dark-card/90 backdrop-blur-xl border-b border-gray-200 dark:border-dark-border shadow-2xl' : 'bg-white/70 dark:bg-dark-card/70 backdrop-blur-md'
-      }`}>
-        <div className="max-w-7xl mx-auto px-6 py-5">
+      <nav className="fixed top-3 left-0 right-0 z-50 px-3 sm:top-4 sm:px-4">
+        <div className={`mx-auto max-w-6xl rounded-2xl border border-white/20 bg-white/10 backdrop-blur-xl transition-all duration-300 ${
+          isScrolled ? 'shadow-[0_8px_24px_rgba(0,0,0,0.35)]' : ''
+        }`}>
+        <div className="max-w-6xl mx-auto px-4 py-3 sm:px-6 sm:py-4">
           <div className="flex items-center justify-between">
             <Link 
               to="/"
-              className="text-3xl font-bold text-gradient hover:scale-105 transition-transform duration-300"
+              className="text-2xl sm:text-3xl font-bold text-gradient hover:scale-105 transition-transform duration-300"
             >
               RS
             </Link>
@@ -60,8 +62,8 @@ function Navigation({ isDarkMode, toggleTheme }) {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`text-gray-700 dark:text-gray-300 hover:text-accent-primary transition-all duration-300 font-medium px-5 py-2.5 rounded-xl card-glow card-glow-hover ${
-                    location.pathname === item.path ? 'text-accent-primary bg-gradient-to-r from-gray-100 to-gray-50 dark:from-dark-hover dark:to-dark-card shadow-md' : ''
+                  className={`header-glass-btn relative font-medium px-3 py-1.5 ${
+                    location.pathname === item.path ? 'text-white' : 'text-gray-100/85'
                   }`}
                 >
                   {item.name}
@@ -69,26 +71,10 @@ function Navigation({ isDarkMode, toggleTheme }) {
               ))}
             </div>
             
-            <div className="flex items-center gap-3">
-              <button
-                onClick={toggleTheme}
-                className="text-gray-700 dark:text-gray-300 hover:text-accent-primary transition-all duration-300 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-dark-hover card-glow card-glow-hover"
-                aria-label="Toggle theme"
-              >
-                {isDarkMode ? (
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
-                ) : (
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                  </svg>
-                )}
-              </button>
-              
+            <div className="flex items-center gap-2 sm:gap-3">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="lg:hidden text-gray-700 dark:text-gray-300 hover:text-accent-primary transition-all duration-300 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-dark-hover"
+                className="glass-btn lg:hidden text-gray-200 hover:text-white p-2 rounded-lg"
                 aria-label="Toggle menu"
               >
                 {isMenuOpen ? (
@@ -106,7 +92,7 @@ function Navigation({ isDarkMode, toggleTheme }) {
                 href="https://github.com/ravindran-dev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden lg:block text-gray-700 dark:text-gray-300 hover:text-accent-primary transition-all duration-300 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-dark-hover card-glow card-glow-hover"
+                className="header-glass-btn hidden lg:block p-2.5"
                 aria-label="GitHub"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -117,7 +103,7 @@ function Navigation({ isDarkMode, toggleTheme }) {
                 href="https://www.linkedin.com/in/ravindran-s-982702327/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden lg:block text-gray-700 dark:text-gray-300 hover:text-accent-primary transition-all duration-300 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-dark-hover card-glow card-glow-hover"
+                className="header-glass-btn hidden lg:block p-2.5"
                 aria-label="LinkedIn"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -126,6 +112,7 @@ function Navigation({ isDarkMode, toggleTheme }) {
               </a>
             </div>
           </div>
+        </div>
         </div>
       </nav>
 
@@ -137,7 +124,7 @@ function Navigation({ isDarkMode, toggleTheme }) {
         onClick={() => setIsMenuOpen(false)}
       />
       <div 
-        className={`fixed top-0 right-0 h-full w-64 bg-white dark:bg-dark-card border-l border-gray-200 dark:border-dark-border shadow-2xl z-50 transform transition-transform duration-300 md:hidden ${
+        className={`fixed top-0 right-0 h-full w-[84vw] max-w-xs bg-[#0f172a]/95 backdrop-blur-xl border-l border-white/15 shadow-2xl z-50 transform transition-transform duration-300 md:hidden ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -146,7 +133,7 @@ function Navigation({ isDarkMode, toggleTheme }) {
             <span className="text-2xl font-bold text-gradient">Menu</span>
             <button
               onClick={() => setIsMenuOpen(false)}
-              className="text-gray-700 dark:text-gray-300 hover:text-accent-primary transition-all duration-300 p-2"
+              className="glass-btn text-slate-200 hover:text-white p-2"
               aria-label="Close menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -160,8 +147,8 @@ function Navigation({ isDarkMode, toggleTheme }) {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`text-gray-700 dark:text-gray-300 hover:text-accent-primary transition-all duration-300 font-medium px-4 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-dark-hover ${
-                  location.pathname === item.path ? 'text-accent-primary bg-gray-100 dark:bg-dark-hover' : ''
+                className={`glass-btn text-slate-200 hover:text-white font-medium px-4 py-3 rounded-lg ${
+                  location.pathname === item.path ? 'text-white bg-white/20 border-cyan-300/40' : ''
                 }`}
               >
                 {item.name}
@@ -169,13 +156,13 @@ function Navigation({ isDarkMode, toggleTheme }) {
             ))}
           </div>
           
-          <div className="mt-8 pt-6 border-t border-gray-200 dark:border-dark-border">
+          <div className="mt-8 pt-6 border-t border-white/15">
             <div className="flex gap-4 justify-center">
               <a
                 href="https://github.com/ravindran-dev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-700 dark:text-gray-300 hover:text-accent-primary transition-all duration-300 p-2 rounded-lg"
+                className="text-slate-200 hover:text-white transition-all duration-300 p-2 rounded-lg"
                 aria-label="GitHub"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -186,7 +173,7 @@ function Navigation({ isDarkMode, toggleTheme }) {
                 href="https://www.linkedin.com/in/ravindran-s-982702327/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-700 dark:text-gray-300 hover:text-accent-primary transition-all duration-300 p-2 rounded-lg"
+                className="text-slate-200 hover:text-white transition-all duration-300 p-2 rounded-lg"
                 aria-label="LinkedIn"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -201,54 +188,46 @@ function Navigation({ isDarkMode, toggleTheme }) {
   );
 }
 
+function AppContent() {
+  return (
+    <div className="relative min-h-screen overflow-x-hidden bg-gradient-to-b from-[#0a0f1f] to-[#0f172a] text-slate-100">
+      <AnimatedBackground />
+      <Navigation />
+      
+      <main className="pt-20 sm:pt-24 md:pt-28">
+        <Routes>
+          <Route path="/" element={<Hero />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/experience" element={<Experience />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/skills" element={<Skills />} />
+          <Route path="/workspace" element={<Workspace />} />
+          <Route path="/achievements" element={<Achievements />} />
+        </Routes>
+      </main>
+
+      <Footer />
+      <NeonCursor />
+    </div>
+  );
+}
+
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      return savedTheme === 'dark';
-    }
-    return true;
-  });
-
-  useEffect(() => {
-    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-    const root = document.documentElement;
-    
-    if (isDarkMode) {
-      root.classList.add('dark');
-      root.classList.remove('light');
-    } else {
-      root.classList.add('light');
-      root.classList.remove('dark');
-    }
-  }, [isDarkMode]);
-
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-  };
+  const { isLoading } = useLoader({ durationMs: 3100 });
 
   return (
     <Router>
-      <div className="min-h-screen bg-gray-50 dark:bg-dark-bg text-gray-900 dark:text-white transition-colors duration-300 relative">
-        <AnimatedBackground />
-        <Navigation isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
-        
-        <main className="pt-16 sm:pt-18">
-          <Routes>
-            <Route path="/" element={<Hero />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/experience" element={<Experience />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/skills" element={<Skills />} />
-            <Route path="/workspace" element={<Workspace />} />
-            <Route path="/github" element={<GitHubStats />} />
-            <Route path="/achievements" element={<Achievements />} />
-          </Routes>
-        </main>
+      <AnimatePresence mode="wait">
+        {isLoading && <Loader isVisible={isLoading} />}
+      </AnimatePresence>
 
-        <Footer />
-        <NeonCursor />
-      </div>
+      <motion.div
+        initial={{ opacity: 0.92, scale: 0.995 }}
+        animate={{ opacity: isLoading ? 0 : 1, scale: isLoading ? 1.01 : 1 }}
+        transition={{ duration: isLoading ? 0.2 : 0.55, ease: 'easeOut' }}
+      >
+        <AppContent />
+      </motion.div>
     </Router>
   );
 }

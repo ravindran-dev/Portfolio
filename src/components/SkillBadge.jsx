@@ -2,11 +2,11 @@ import React from 'react';
 
 const SkillBadge = ({ skill, icon, category }) => {
   const categoryColors = {
-    language: 'border-blue-500/30 bg-blue-500/10 text-blue-400',
-    framework: 'border-purple-500/30 bg-purple-500/10 text-purple-400',
-    core: 'border-green-500/30 bg-green-500/10 text-green-400',
-    platform: 'border-orange-500/30 bg-orange-500/10 text-orange-400',
-    soft: 'border-pink-500/30 bg-pink-500/10 text-pink-400',
+    language: 'border-cyan-400/30 bg-cyan-400/10 text-cyan-200',
+    framework: 'border-sky-400/30 bg-sky-400/10 text-sky-200',
+    core: 'border-blue-400/30 bg-blue-400/10 text-blue-200',
+    platform: 'border-indigo-400/30 bg-indigo-400/10 text-indigo-200',
+    soft: 'border-teal-400/30 bg-teal-400/10 text-teal-200',
   };
 
   // Icon SVGs for different technologies
@@ -127,9 +127,11 @@ const SkillBadge = ({ skill, icon, category }) => {
   };
 
   return (
-    <span className={`px-4 py-2 rounded-lg text-sm font-medium border transition-all duration-300 hover:scale-105 flex items-center gap-2 ${categoryColors[category] || 'border-gray-500/30 bg-gray-500/10 text-gray-400'}`}>
-      {icon ? <span className="text-base">{icon}</span> : getIcon(skill)}
-      {skill}
+    <span className={`group rounded-xl px-3 py-2.5 text-sm font-medium border backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_14px_rgba(56,189,248,0.2)] flex items-center gap-2 ${categoryColors[category] || 'border-white/20 bg-white/10 text-slate-200'}`}>
+      <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-black/15">
+        {icon ? <span className="text-base">{icon}</span> : getIcon(skill) || <span className="h-2 w-2 rounded-full bg-current" />}
+      </span>
+      <span>{skill}</span>
     </span>
   );
 };

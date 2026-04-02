@@ -34,18 +34,18 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-white dark:bg-dark-card border-t border-gray-200 dark:border-dark-border py-12 px-4">
+    <footer className="border-t border-white/15 bg-white/10 px-4 py-10 text-slate-100 backdrop-blur-xl sm:py-12">
       <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
           {/* Social Links */}
-          <div className="flex gap-6">
+          <div className="flex gap-5 sm:gap-6">
             {socialLinks.map((link, index) => (
               <a
                 key={index}
                 href={link.url}
                 target={link.url.startsWith('http') ? '_blank' : undefined}
                 rel={link.url.startsWith('http') ? 'noopener noreferrer' : undefined}
-                className="text-gray-500 dark:text-gray-400 hover:text-accent-primary transition-colors duration-300 hover:scale-110 transform"
+                className="transform text-slate-300 transition-colors duration-300 hover:scale-110 hover:text-cyan-200"
                 aria-label={link.name}
               >
                 {link.icon}
@@ -55,10 +55,10 @@ const Footer = () => {
           
           {/* Copyright */}
           <div className="text-center md:text-right">
-            <p className="text-gray-600 dark:text-gray-400">
-              © {currentYear} Built by <span className="text-accent-primary font-semibold">Ravindran S</span>
+            <p className="text-slate-300">
+              © {currentYear} Built by <span className="text-cyan-300 font-semibold">Ravindran S</span>
             </p>
-            <p className="text-gray-500 text-sm mt-1">
+            <p className="text-slate-400 text-sm mt-1">
               Made with React & Tailwind CSS
             </p>
           </div>
@@ -68,7 +68,7 @@ const Footer = () => {
         <div className="mt-8 text-center">
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="text-gray-500 dark:text-gray-400 hover:text-accent-primary transition-all duration-300 inline-flex items-center gap-2 group"
+            className="glass-btn text-slate-300 hover:text-cyan-200 inline-flex items-center gap-2 group px-3 py-1.5"
             aria-label="Scroll to top"
           >
             <span>Back to top</span>

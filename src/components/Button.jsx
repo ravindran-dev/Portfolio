@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const Button = ({ children, variant = 'primary', href, onClick, className = '' }) => {
-  const baseStyles = 'px-8 py-3.5 rounded-xl font-semibold transition-all duration-300 inline-flex items-center gap-2 relative overflow-hidden group';
+  const baseStyles = 'glass-btn px-8 py-3.5 rounded-xl font-semibold transition-all duration-300 inline-flex items-center gap-2 relative overflow-hidden group';
   
   const variants = {
     primary: 'bg-gradient-to-r from-neon-blue to-accent-primary text-white shadow-lg shadow-neon-blue/50 hover:shadow-xl hover:shadow-neon-blue/70 hover:scale-105',

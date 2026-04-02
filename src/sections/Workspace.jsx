@@ -204,19 +204,19 @@ Active open-source contributor and Linux enthusiast.`,
 
   const Prompt = ({ showInput = false, typingCommand = '' }) => (
     <div className="flex items-center gap-1.5 sm:gap-3 flex-wrap mb-2">
-      <span className="inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-xs sm:text-sm">
+      <span className="inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg bg-white/10 border border-white/15 backdrop-blur-md hover:bg-white/20 transition-all text-xs sm:text-sm shadow-[0_6px_14px_rgba(0,0,0,0.35)]">
         <i className="fa-brands fa-linux text-cyan-400 text-xs sm:text-sm" style={{ textShadow: '0 0 10px rgba(34, 211, 238, 0.6)' }}></i>
         <span className="text-cyan-400 font-semibold">Arch</span>
       </span>
-      <span className="inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-xs sm:text-sm">
+      <span className="inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg bg-white/10 border border-white/15 backdrop-blur-md hover:bg-white/20 transition-all text-xs sm:text-sm shadow-[0_6px_14px_rgba(0,0,0,0.35)]">
         <i className="fa-regular fa-clock text-purple-400 text-xs sm:text-sm" style={{ textShadow: '0 0 10px rgba(192, 132, 252, 0.6)' }}></i>
         <span className="text-purple-400">{getTime()}</span>
       </span>
-      <span className="inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-xs sm:text-sm">
+      <span className="inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg bg-white/10 border border-white/15 backdrop-blur-md hover:bg-white/20 transition-all text-xs sm:text-sm shadow-[0_6px_14px_rgba(0,0,0,0.35)]">
         <i className="fa-solid fa-user text-green-400 text-xs sm:text-sm" style={{ textShadow: '0 0 10px rgba(74, 222, 128, 0.6)' }}></i>
         <span className="text-green-400">ravindran@s</span>
       </span>
-      <span className="inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-xs sm:text-sm">
+      <span className="inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg bg-white/10 border border-white/15 backdrop-blur-md hover:bg-white/20 transition-all text-xs sm:text-sm shadow-[0_6px_14px_rgba(0,0,0,0.35)]">
         <i className="fa-solid fa-folder text-yellow-400 text-xs sm:text-sm" style={{ textShadow: '0 0 10px rgba(250, 204, 21, 0.6)' }}></i>
         <span className="text-yellow-400">~</span>
       </span>
@@ -228,28 +228,30 @@ Active open-source contributor and Linux enthusiast.`,
   );
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-2 sm:px-4 py-20 sm:py-24">
+    <section className="relative min-h-screen flex items-center justify-center px-2 py-16 sm:px-4 sm:py-24">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(56,189,248,0.12),transparent_42%),radial-gradient(circle_at_82%_78%,rgba(14,165,233,0.10),transparent_38%)]" />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="w-full max-w-5xl"
+        className="relative w-full max-w-5xl"
       >
-        <div className="terminal-window relative rounded-2xl overflow-hidden"
+        <div className="terminal-window relative overflow-hidden rounded-2xl border border-cyan-300/30 bg-black/45 backdrop-blur-2xl sm:rounded-3xl"
           style={{
-            background: '#000',
-            boxShadow: '0 0 0 1px rgba(34, 211, 238, 0.35), 0 0 18px rgba(34, 211, 238, 0.18), 0 30px 60px rgba(0, 0, 0, 0.9)'
+            boxShadow: '0 0 0 1px rgba(34, 211, 238, 0.25), 0 0 26px rgba(34, 211, 238, 0.12), 0 28px 70px rgba(0, 0, 0, 0.72)'
           }}
         >
           {/* Terminal decorative border */}
-          <div className="absolute inset-0 rounded-2xl pointer-events-none"
+          <div className="absolute inset-0 rounded-2xl pointer-events-none sm:rounded-3xl"
             style={{
-              boxShadow: 'inset 0 0 0 1px rgba(255, 255, 255, 0.04), inset 0 0 18px rgba(34, 211, 238, 0.06)'
+              boxShadow: 'inset 0 0 0 1px rgba(255, 255, 255, 0.08), inset 0 0 22px rgba(34, 211, 238, 0.08)'
             }}
           />
 
+          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.08)_0%,rgba(255,255,255,0.02)_35%,rgba(255,255,255,0)_60%)]" />
+
           {/* Terminal Header */}
-          <div className="terminal-header bg-black/80 backdrop-blur-sm px-3 sm:px-5 py-2 sm:py-3 flex items-center gap-2 border-b border-cyan-500/20 relative">
+          <div className="terminal-header bg-black/55 backdrop-blur-xl px-3 sm:px-5 py-2 sm:py-3 flex items-center gap-2 border-b border-cyan-400/25 relative">
             <div className="flex items-center gap-1.5 sm:gap-2">
               <div className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-red-500"></div>
               <div className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-yellow-500"></div>
@@ -264,9 +266,9 @@ Active open-source contributor and Linux enthusiast.`,
           {/* Terminal Content */}
           <div 
             ref={terminalRef}
-            className="terminal-content bg-black p-3 sm:p-6 font-mono text-xs sm:text-sm overflow-y-auto"
+            className="terminal-content bg-black/50 backdrop-blur-xl p-3 sm:p-6 font-mono text-xs sm:text-sm overflow-y-auto"
             style={{ 
-              height: '70vh',
+              height: '64vh',
               maxHeight: '600px',
               fontFamily: '"JetBrains Mono", "Fira Code", monospace'
             }}

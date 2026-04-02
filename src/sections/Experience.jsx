@@ -42,7 +42,7 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="py-20 px-4">
+    <section id="experience" className="px-4 py-16 text-slate-100 sm:py-20">
       <div className="max-w-6xl mx-auto">
         <SectionTitle subtitle="My professional journey">
           Experience
@@ -52,30 +52,30 @@ const Experience = () => {
           {experiences.map((exp, index) => (
             <div 
               key={index}
-              className="bg-white dark:bg-dark-card border border-gray-200 dark:border-dark-border rounded-xl p-6 md:p-8 hover:border-accent-primary transition-all duration-300 animate-slide-up group card-glow-primary card-glow-hover"
+              className="glass-panel rounded-xl p-6 md:p-8 animate-slide-up group"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4 gap-2">
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-accent-primary transition-colors">
+                  <h3 className="text-xl font-bold text-white transition-colors group-hover:text-cyan-200 sm:text-2xl">
                     {exp.title}
                   </h3>
-                  <p className="text-lg text-accent-primary font-semibold mt-1">
+                  <p className="mt-1 text-base font-semibold text-cyan-300 sm:text-lg">
                     {exp.organization}
                   </p>
                 </div>
-                <span className="text-gray-500 dark:text-gray-400 text-sm md:text-base whitespace-nowrap">
+                <span className="text-slate-300 text-sm md:text-base whitespace-nowrap">
                   {exp.duration}
                 </span>
               </div>
               
-              <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+              <p className="text-slate-300 mb-4 leading-relaxed">
                 {exp.description}
               </p>
               
               <ul className="space-y-2 mb-4">
                 {exp.achievements.map((achievement, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                  <li key={idx} className="flex items-start gap-3 text-slate-200">
                     <svg className="w-5 h-5 text-accent-primary mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -88,7 +88,7 @@ const Experience = () => {
                 {exp.tags.map((tag, idx) => (
                   <span 
                     key={idx}
-                    className="bg-gray-100 dark:bg-dark-hover text-gray-700 dark:text-gray-300 px-3 py-1 rounded-md text-sm border border-gray-300 dark:border-dark-border"
+                    className="bg-white/10 text-slate-200 px-3 py-1 rounded-md text-sm border border-white/20"
                   >
                     {tag}
                   </span>

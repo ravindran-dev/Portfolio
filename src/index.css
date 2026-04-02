@@ -11,6 +11,18 @@
     @apply font-sans antialiased transition-colors duration-300;
     cursor: none;
   }
+
+  button {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+
+  button:hover {
+    transform: translateY(-2px);
+  }
+
+  button:active {
+    transform: translateY(0) scale(0.98);
+  }
   
   html.dark body {
     @apply bg-dark-bg text-gray-100;
@@ -31,63 +43,120 @@
       display: none !important;
     }
   }
+}
 
-  .neon-cursor-dot {
-    position: fixed;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 10000;
-    transform: translate(-50%, -50%);
-    transition: width 0.15s ease, height 0.15s ease;
-  }
-  
-  html.dark .neon-cursor-dot {
-    background: #00d4ff;
-    box-shadow: 0 0 20px #00d4ff,
-                0 0 40px #00d4ff,
-                0 0 60px rgba(0, 212, 255, 0.5);
-  }
-  
-  html:not(.dark) .neon-cursor-dot {
-    background: #3b82f6;
-    box-shadow: 0 0 15px #3b82f6,
-                0 0 30px #3b82f6,
-                0 0 45px rgba(59, 130, 246, 0.4);
-  }
-  
-  .neon-cursor-dot.hover {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .neon-cursor-outline {
-    position: fixed;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: width 0.2s ease, height 0.2s ease;
-  }
-  
-  html.dark .neon-cursor-outline {
-    border: 2px solid rgba(0, 212, 255, 0.5);
-  }
-  
-  html:not(.dark) .neon-cursor-outline {
-    border: 2px solid rgba(59, 130, 246, 0.5);
-  }
-  
-  .neon-cursor-outline.hover {
-    width: 60px;
-    height: 60px;
-  }
+.neon-cursor-dot {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: width 0.15s ease, height 0.15s ease;
+}
+
+html.dark .neon-cursor-dot {
+  background: #00d4ff;
+  box-shadow: 0 0 20px #00d4ff,
+              0 0 40px #00d4ff,
+              0 0 60px rgba(0, 212, 255, 0.5);
+}
+
+html:not(.dark) .neon-cursor-dot {
+  background: #3b82f6;
+  box-shadow: 0 0 15px #3b82f6,
+              0 0 30px #3b82f6,
+              0 0 45px rgba(59, 130, 246, 0.4);
+}
+
+.neon-cursor-dot.hover {
+  width: 20px;
+  height: 20px;
+}
+
+.neon-cursor-outline {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease;
+}
+
+html.dark .neon-cursor-outline {
+  border: 2px solid rgba(0, 212, 255, 0.5);
+}
+
+html:not(.dark) .neon-cursor-outline {
+  border: 2px solid rgba(59, 130, 246, 0.5);
+}
+
+.neon-cursor-outline.hover {
+  width: 60px;
+  height: 60px;
 }
 
 @layer utilities {
+  .glass-btn {
+    @apply relative overflow-hidden rounded-lg border border-white/25 bg-white/10 text-slate-100 backdrop-blur-md transition-all duration-300;
+  }
+
+  .header-glass-btn {
+    @apply relative overflow-hidden rounded-lg border border-transparent bg-transparent text-slate-200 transition-all duration-300;
+  }
+
+  .header-glass-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-130%);
+    background: linear-gradient(110deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transition: transform 0.65s ease;
+  }
+
+  .header-glass-btn:hover {
+    @apply border-white/30 bg-white/15 text-white backdrop-blur-md;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.24);
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  .header-glass-btn:hover::before {
+    transform: translateX(130%);
+  }
+
+  .glass-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-120%);
+    background: linear-gradient(110deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: transform 0.7s ease;
+  }
+
+  .glass-btn:hover::before {
+    transform: translateX(120%);
+  }
+
+  .glass-btn:hover {
+    border-color: rgba(125, 211, 252, 0.6);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.22);
+    transform: translateY(-2px);
+  }
+
+  .glass-panel {
+    @apply relative border border-white/15 bg-white/10 backdrop-blur-xl;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  .glass-panel:hover {
+    border-color: rgba(125, 211, 252, 0.6);
+    box-shadow: 0 0 26px rgba(56, 189, 248, 0.2);
+    transform: translateY(-4px);
+  }
+
   .text-gradient {
     @apply bg-gradient-to-r from-accent-primary to-accent-secondary bg-clip-text text-transparent;
   }

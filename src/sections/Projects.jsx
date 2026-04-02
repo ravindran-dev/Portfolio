@@ -56,7 +56,7 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-20 px-4 bg-white dark:bg-dark-card/30">
+    <section id="projects" className="px-4 py-16 text-slate-100 sm:py-20">
       <div className="max-w-6xl mx-auto">
         <FadeInSection>
           <SectionTitle subtitle="Innovative solutions and experiments">
@@ -64,7 +64,7 @@ const Projects = () => {
           </SectionTitle>
         </FadeInSection>
         
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid gap-5 md:grid-cols-2 md:gap-6">
           {projects.map((project, index) => (
             <FadeInSection key={index} delay={index * 0.1}>
               <ProjectCard {...project} />
