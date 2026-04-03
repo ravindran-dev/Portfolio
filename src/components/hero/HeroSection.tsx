@@ -10,7 +10,7 @@ function SocialIcon({ href, label, children }: { href: string; label: string; ch
       target="_blank"
       rel="noreferrer"
       whileHover={{ y: -3, scale: 1.08 }}
-      className="rounded-full border border-white/20 bg-white/15 p-2 text-slate-100 backdrop-blur-md transition hover:border-cyan-300/70 hover:text-white"
+      className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/15 p-2 text-slate-100 backdrop-blur-md transition hover:border-cyan-300/70 hover:text-white"
       aria-label={label}
     >
       {children}
@@ -20,32 +20,32 @@ function SocialIcon({ href, label, children }: { href: string; label: string; ch
 
 export default function HeroSection() {
   return (
-    <section className="flex min-h-screen w-full items-center bg-gradient-to-b from-[#0a0f1f] to-[#0f172a] text-slate-100">
+    <section className="flex min-h-[calc(100vh-4.5rem)] w-full items-start bg-gradient-to-b from-[#0a0f1f] to-[#0f172a] pt-10 text-slate-100 sm:min-h-[calc(100vh-5rem)] sm:pt-8 md:min-h-[calc(100vh-6rem)] md:items-center md:pt-0">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.55, ease: 'easeOut' }}
         className="mx-auto w-full max-w-7xl px-6"
       >
-        <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
+        <div className="grid items-center gap-4 sm:gap-7 md:grid-cols-2 md:gap-16">
           <motion.div
             initial={{ opacity: 0, x: -14 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.45, ease: 'easeOut' }}
-            className="space-y-6 text-center md:text-left"
+            className="space-y-1.5 text-center sm:space-y-2.5 md:space-y-5 md:text-left"
           >
             <p className="text-base text-cyan-100/90 sm:text-lg md:text-xl">Hello, I am</p>
-            <h1 className="bg-gradient-to-r from-white via-cyan-100 to-cyan-300 bg-clip-text text-4xl font-black leading-tight text-transparent drop-shadow-[0_8px_24px_rgba(34,211,238,0.25)] sm:text-5xl md:text-6xl lg:text-7xl">
+            <h1 className="bg-gradient-to-r from-white via-cyan-100 to-cyan-300 bg-clip-text text-4xl font-black leading-[1.05] text-transparent drop-shadow-[0_8px_24px_rgba(34,211,238,0.25)] sm:text-5xl md:text-6xl lg:text-7xl">
               RAVINDRAN S
             </h1>
             <p className="inline-flex rounded-full border border-cyan-300/35 bg-cyan-400/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-100 sm:px-4 sm:text-xs sm:tracking-[0.24em]">
               AI . BUILD . SHIP
             </p>
-            <p className="mx-auto max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg md:mx-0 md:text-xl">
+            <p className="mx-auto max-w-lg text-base leading-snug text-slate-300 sm:text-lg sm:leading-relaxed md:mx-0 md:text-[1.15rem] md:leading-relaxed">
               AI/ML Engineer & Full-Stack Developer focused on intelligent systems and scalable applications.
             </p>
 
-            <div className="flex items-center justify-center gap-3 md:justify-start">
+            <div className="flex items-center justify-center gap-2.5 pt-1 sm:gap-3 md:justify-start">
               <SocialIcon href="https://github.com/ravindran-dev" label="GitHub">
                 <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49 0-.24-.01-.89-.01-1.74-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.57 2.34 1.11 2.91.85.09-.67.35-1.11.64-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.04 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.28 9.28 0 0112 6.9c.85 0 1.71.12 2.5.35 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.5-.01 2.84 0 .27.18.6.69.49A10.2 10.2 0 0022 12.23C22 6.58 17.52 2 12 2z" />
@@ -66,9 +66,15 @@ export default function HeroSection() {
               </SocialIcon>
             </div>
 
-            <div className="hidden items-center gap-3 sm:flex md:justify-start">
+            <div className="hidden items-center gap-3 pt-1 sm:flex md:justify-start">
               <motion.div whileHover={{ y: -1 }} whileTap={{ scale: 0.98 }}>
-                <Link to="/projects" className="glass-btn block min-w-[156px] px-6 py-3 text-center font-semibold">
+                <Link
+                  to="/projects"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/15 px-4 py-2.5 text-sm font-semibold text-slate-100 backdrop-blur-md transition hover:border-cyan-300/70 hover:text-white"
+                >
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5A2.5 2.5 0 015.5 5h5.25a2.5 2.5 0 011.768.732l.75.75a2.5 2.5 0 001.768.732H18.5A2.5 2.5 0 0121 9.714v8.786A2.5 2.5 0 0118.5 21h-13A2.5 2.5 0 013 18.5v-11z" />
+                  </svg>
                   Projects
                 </Link>
               </motion.div>
@@ -78,16 +84,21 @@ export default function HeroSection() {
                 rel="noreferrer"
                 whileHover={{ y: -1 }}
                 whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/15 px-4 py-2.5 text-sm font-medium text-slate-100 backdrop-blur-md transition hover:border-cyan-300/70 hover:text-white"
               >
-                <span className="glass-btn block min-w-[156px] px-6 py-3 text-center font-medium">Resume</span>
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 3.75h6.879a1.5 1.5 0 011.06.44l3.371 3.371a1.5 1.5 0 01.44 1.06V19.5A1.5 1.5 0 0117.75 21h-10.5A1.5 1.5 0 015.75 19.5v-14A1.5 1.5 0 017.25 4h.25z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 10.5h7.5M8.25 14.25h7.5M8.25 18h4.5" />
+                </svg>
+                Resume
               </motion.a>
             </div>
 
-            <div className="flex items-center justify-center gap-3 sm:hidden">
+            <div className="flex items-center justify-center gap-2.5 pt-1 sm:hidden">
               <motion.div whileTap={{ scale: 0.95 }}>
                 <Link
                   to="/projects"
-                  className="glass-btn inline-flex h-12 w-12 items-center justify-center rounded-xl"
+                  className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/15 p-2 text-slate-100 backdrop-blur-md transition hover:border-cyan-300/70 hover:text-white"
                   aria-label="Projects"
                 >
                   <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24" aria-hidden="true">
@@ -100,7 +111,7 @@ export default function HeroSection() {
                 target="_blank"
                 rel="noreferrer"
                 whileTap={{ scale: 0.95 }}
-                className="glass-btn inline-flex h-12 w-12 items-center justify-center rounded-xl"
+                className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/15 p-2 text-slate-100 backdrop-blur-md transition hover:border-cyan-300/70 hover:text-white"
                 aria-label="Resume"
               >
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24" aria-hidden="true">

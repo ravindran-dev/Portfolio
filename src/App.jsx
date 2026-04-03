@@ -189,12 +189,15 @@ function Navigation() {
 }
 
 function AppContent() {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-gradient-to-b from-[#0a0f1f] to-[#0f172a] text-slate-100">
       <AnimatedBackground />
       <Navigation />
       
-      <main className="pt-20 sm:pt-24 md:pt-28">
+      <main className={isHomePage ? 'pt-16 sm:pt-20 md:pt-24' : 'pt-20 sm:pt-24 md:pt-28'}>
         <Routes>
           <Route path="/" element={<Hero />} />
           <Route path="/about" element={<About />} />
