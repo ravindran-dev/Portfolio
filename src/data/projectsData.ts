@@ -3,6 +3,7 @@ export const projectsData = {
     title: "AirMouse3D",
     description: "3D Air Mouse Using Smartphone Motion Sensors",
     tech: ["Rust", "Python", "Firebase", "Kotlin", "Android Sensor API"],
+    github: "https://github.com/ravindran-dev/AirMouse3D",
     content: `
 # 3D Air Mouse Using Smartphone Motion Sensors
 
@@ -51,6 +52,7 @@ OS-Level Mouse Control
     title: "GenuineGate",
     description: "Real-time anti-scalping bot protection MVP",
     tech: ["Go", "Redis", "Nginx", "JavaScript", "Gin"],
+    github: "https://github.com/ravindran-dev/GenuineGate",
     content: `
 # GenuineGate
 > **Real-time anti-scalping bot protection MVP**  
