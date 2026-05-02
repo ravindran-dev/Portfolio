@@ -68,7 +68,7 @@ DevOps: Docker, Git, Linux, CI/CD`}
         return (
           <div className="flex gap-4 text-cyan-400">
             <a href="https://github.com/ravindran-dev" target="_blank" className="hover:underline hover:text-white">GitHub</a> | 
-            <a href="https://www.linkedin.com/in/ravindran-s" target="_blank" className="hover:underline hover:text-white">LinkedIn</a> | 
+            <a href="https://www.linkedin.com/in/ravindran-s-982702327" target="_blank" className="hover:underline hover:text-white">LinkedIn</a> | 
             <a href="mailto:ravindrans.dev@gmail.com" className="hover:underline hover:text-white">Email</a>
           </div>
         );

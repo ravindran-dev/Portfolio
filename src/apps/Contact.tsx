@@ -1,8 +1,21 @@
 import Window from "@/components/Window";
-import { FiMail, FiGithub, FiLinkedin, FiMapPin, FiExternalLink } from "react-icons/fi";
+import { FiMail, FiGithub, FiLinkedin, FiMapPin, FiExternalLink, FiSend } from "react-icons/fi";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function Contact() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleSend = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !message) return;
+    const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+    window.location.href = `mailto:ravindrans.dev@gmail.com?subject=${subject}&body=${body}`;
+  };
+
   const contacts = [
     {
       icon: FiMail,
@@ -21,54 +34,108 @@ export default function Contact() {
     {
       icon: FiLinkedin,
       label: "LinkedIn",
-      value: "linkedin.com/in/ravindran-s",
-      link: "https://linkedin.com/in/ravindran-s",
+      value: "linkedin.com/in/ravindran-s-982702327",
+      link: "https://www.linkedin.com/in/ravindran-s-982702327",
       color: "text-blue-400"
     }
   ];
 
   return (
-    <Window id="contact" title="Contact" defaultWidth={500} defaultHeight={500}>
-      <div className="w-full h-full flex flex-col items-center justify-center p-8 bg-gradient-to-br from-[#1a1a1c] to-[#0d0d0f] text-white">
+    <Window id="contact" title="Contact" defaultWidth={800} defaultHeight={650}>
+      <div className="w-full h-full flex flex-col md:flex-row bg-[#0d0d0f] text-white overflow-hidden">
         
-        <div className="flex flex-col items-center mb-8">
-          <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 p-[2px] shadow-[0_0_20px_rgba(59,130,246,0.3)]">
-            <div className="w-full h-full rounded-full bg-[#131313] flex items-center justify-center">
-              <FiMail className="text-3xl text-white/90" />
+        {/* Left Side: Info */}
+        <div className="w-full md:w-2/5 p-8 flex flex-col bg-gradient-to-b from-[#1a1a1c] to-[#0d0d0f] border-r border-white/5">
+          <div className="flex flex-col items-center mb-8">
+            <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 p-[2px] shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+              <div className="w-full h-full rounded-full bg-[#131313] flex items-center justify-center">
+                <FiMail className="text-3xl text-white/90" />
+              </div>
             </div>
+            <h2 className="text-2xl font-display font-bold mt-4 tracking-wide text-center">Get In Touch</h2>
+            <p className="text-white/50 text-sm mt-1 flex items-center gap-2">
+              <FiMapPin /> Chennai, India
+            </p>
           </div>
-          <h2 className="text-2xl font-display font-bold mt-4 tracking-wide">Get In Touch</h2>
-          <p className="text-white/50 text-sm mt-1 flex items-center gap-2">
-            <FiMapPin /> Chennai, India
-          </p>
+
+          <div className="w-full flex flex-col gap-3">
+            {contacts.map((contact, index) => (
+              <motion.a
+                key={index}
+                href={contact.link}
+                target="_blank"
+                rel="noreferrer"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="group flex items-center gap-4 p-3.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer overflow-hidden relative"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.03] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                
+                <div className={`p-2.5 rounded-lg bg-black/30 shadow-inner ${contact.color}`}>
+                  <contact.icon className="text-lg" />
+                </div>
+                
+                <div className="flex flex-col flex-1 min-w-0">
+                  <span className="text-[10px] text-white/40 uppercase tracking-wider font-semibold">{contact.label}</span>
+                  <span className="text-xs font-medium text-white/80 truncate">{contact.value}</span>
+                </div>
+                
+                <FiExternalLink className="text-white/20 group-hover:text-white/60 transition-colors" />
+              </motion.a>
+            ))}
+          </div>
         </div>
 
-        <div className="w-full flex flex-col gap-3">
-          {contacts.map((contact, index) => (
-            <motion.a
-              key={index}
-              href={contact.link}
-              target="_blank"
-              rel="noreferrer"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="group flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer overflow-hidden relative"
+        {/* Right Side: Form */}
+        <div className="w-full md:w-3/5 p-8 flex flex-col bg-[#0d0d0f] overflow-y-auto">
+          <h3 className="text-lg font-bold mb-6 text-white/90">Send a Message</h3>
+          
+          <form onSubmit={handleSend} className="flex flex-col gap-5">
+            <div className="flex flex-col gap-2">
+              <label className="text-xs text-white/40 uppercase tracking-widest font-bold ml-1">Name</label>
+              <input 
+                type="text" 
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Your Name" 
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-blue-500/50 focus:bg-white/[0.08] outline-none transition-all placeholder:text-white/20"
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="text-xs text-white/40 uppercase tracking-widest font-bold ml-1">Email</label>
+              <input 
+                type="email" 
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="your@email.com" 
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-blue-500/50 focus:bg-white/[0.08] outline-none transition-all placeholder:text-white/20"
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="text-xs text-white/40 uppercase tracking-widest font-bold ml-1">Message</label>
+              <textarea 
+                required
+                rows={5}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="What's on your mind?" 
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-blue-500/50 focus:bg-white/[0.08] outline-none transition-all placeholder:text-white/20 resize-none"
+              />
+            </div>
+
+            <motion.button 
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="mt-2 w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold text-sm shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2 hover:shadow-blue-500/40 transition-all"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.03] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-              
-              <div className={`p-3 rounded-lg bg-black/30 shadow-inner ${contact.color}`}>
-                <contact.icon className="text-xl" />
-              </div>
-              
-              <div className="flex flex-col flex-1">
-                <span className="text-xs text-white/50 uppercase tracking-wider font-semibold">{contact.label}</span>
-                <span className="text-sm font-medium text-white/90 truncate">{contact.value}</span>
-              </div>
-              
-              <FiExternalLink className="text-white/30 group-hover:text-white/80 transition-colors" />
-            </motion.a>
-          ))}
+              <FiSend /> Send Message
+            </motion.button>
+          </form>
         </div>
       </div>
     </Window>

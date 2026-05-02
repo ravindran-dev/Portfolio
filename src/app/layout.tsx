@@ -22,6 +22,8 @@ export const metadata: Metadata = {
   description: "High-end interactive developer portfolio.",
 };
 
+import CustomCursor from "@/components/CustomCursor";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -33,6 +35,7 @@ export default function RootLayout({
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full antialiased dark`}
     >
       <body className="h-full flex flex-col overflow-hidden bg-background text-foreground font-sans">
+        <CustomCursor />
         {children}
       </body>
     </html>

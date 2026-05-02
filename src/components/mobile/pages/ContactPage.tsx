@@ -62,7 +62,7 @@ export default function ContactPage() {
             <div className="flex-1">
               <span className="text-white font-medium text-[16px]">LinkedIn</span>
             </div>
-            <span className="text-[#839493] text-[15px] truncate max-w-[120px]">/in/ravindran-s...</span>
+            <span className="text-[#839493] text-[15px] truncate max-w-[120px]">/in/ravindran-s-982702327</span>
           </a>
         </div>
       </motion.div>

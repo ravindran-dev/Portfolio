@@ -6,9 +6,9 @@ import { FcFolder } from "react-icons/fc";
 import { FiFileText } from "react-icons/fi";
 
 const desktopIcons = [
-  { id: "about", label: "About Me", icon: <div className="w-12 h-12 bg-[#2d2d2d] rounded shadow-sm border border-white/10 flex items-center justify-center text-blue-400 font-bold font-serif text-xl">A</div> },
-  { id: "resume", label: "Resume.pdf", icon: <div className="w-10 h-12 bg-[#2d2d2d] rounded shadow-sm border border-white/10 flex flex-col items-center justify-center text-red-400 overflow-hidden relative"><div className="absolute top-0 w-full h-3 bg-red-600 flex items-center justify-center text-[6px] font-bold text-white tracking-widest">PDF</div><FiFileText className="text-xl mt-2" /></div> },
   { id: "projects-folder", label: "Projects", icon: <FcFolder className="text-[48px]" /> },
+  { id: "resume", label: "Resume.pdf", icon: <div className="w-10 h-12 bg-[#2d2d2d] rounded shadow-sm border border-white/10 flex flex-col items-center justify-center text-red-400 overflow-hidden relative"><div className="absolute top-0 w-full h-3 bg-red-600 flex items-center justify-center text-[6px] font-bold text-white tracking-widest">PDF</div><FiFileText className="text-xl mt-2" /></div> },
+  { id: "about", label: "About Me", icon: <div className="w-12 h-12 bg-[#2d2d2d] rounded shadow-sm border border-white/10 flex items-center justify-center text-blue-400 font-bold font-serif text-xl">A</div> },
 ];
 
 export default function DesktopIcons() {

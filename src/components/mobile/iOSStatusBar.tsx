@@ -1,10 +1,15 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { IoWifi, IoBatteryFull } from 'react-icons/io5';
 import { MdSignalCellular4Bar } from 'react-icons/md';
 
-export default function IOSStatusBar() {
+interface IOSStatusBarProps {
+  onOpenControlCenter: () => void;
+}
+
+export default function IOSStatusBar({ onOpenControlCenter }: IOSStatusBarProps) {
   const [time, setTime] = useState('');
 
   useEffect(() => {
@@ -18,24 +23,30 @@ export default function IOSStatusBar() {
   }, []);
 
   return (
-    <div className="absolute top-0 left-0 w-full h-12 flex items-center justify-between px-5 pt-2 z-50 text-white font-sans pointer-events-none">
+    <motion.div 
+      onPanEnd={(_, info) => {
+        if (info.offset.y > 30) {
+          onOpenControlCenter();
+        }
+      }}
+      onClick={onOpenControlCenter}
+      className="absolute top-0 left-0 w-full h-14 flex items-center justify-between px-5 pt-2 z-50 text-white font-sans pointer-events-auto cursor-pointer"
+    >
       <div className="text-[15px] font-semibold w-16 text-center tracking-tight">
         {time}
       </div>
       
-      {/* Dynamic Island */}
-      <div className="w-[120px] h-[32px] bg-black rounded-[16px] shadow-[0_0_0_1px_rgba(255,255,255,0.05),_0_10px_30px_rgba(0,0,0,0.5)] flex items-center justify-center relative pointer-events-auto cursor-pointer group transition-all duration-300 hover:w-[130px]">
-        {/* Camera cutout reflection */}
-        <div className="w-3 h-3 rounded-full bg-[#111] absolute right-[10px] shadow-[inset_0_-1px_2px_rgba(255,255,255,0.1)] flex items-center justify-center">
-            <div className="w-1.5 h-1.5 bg-[#0a0a0a] rounded-full"></div>
-        </div>
-      </div>
+      {/* Spacer for Dynamic Island */}
+      <div className="w-[120px] h-[32px] opacity-0" />
       
       <div className="flex items-center gap-1.5 w-16 justify-end">
         <MdSignalCellular4Bar className="text-[15px]" />
         <IoWifi className="text-[15px]" />
         <IoBatteryFull className="text-[20px]" />
       </div>
-    </div>
+
+      {/* Swipe hint handle for UX */}
+      <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-8 h-1 bg-white/10 rounded-full" />
+    </motion.div>
   );
 }
