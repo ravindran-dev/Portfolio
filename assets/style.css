@@ -1,0 +1,208 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "JetBrains Mono", "JetBrainsMono Nerd Font", monospace;
+}
+
+body {
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: #e5e7eb;
+}
+
+.terminal {
+  position: relative;
+  width: 88%;
+  max-width: 860px;
+  background: #000;
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.35),
+    0 0 18px rgba(56, 189, 248, 0.18),
+    0 30px 60px rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+}
+
+.terminal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 0 18px rgba(56, 189, 248, 0.06);
+}
+
+.bar {
+  position: relative;
+}
+
+.bar::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 16px;
+  right: 16px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(56, 189, 248, 0.6),
+    transparent
+  );
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.red { background: #ef4444; }
+.yellow { background: #facc15; }
+.green { background: #22c55e; }
+
+.title {
+  margin-left: 10px;
+  color: #ffffff;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.content {
+  padding: 16px 18px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #e5e7eb;
+}
+
+.prompt {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.segment {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.segment:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.segment.os {
+  color: #38bdf8;
+}
+
+.segment.time {
+  color: #a78bfa;
+}
+
+.segment.user {
+  color: #22c55e;
+}
+
+.segment.cwd {
+  color: #facc15;
+}
+
+.nf-icon {
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 2px;
+}
+
+.arch-icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.arch {
+  color: #38bdf8;
+  font-size: 16px;
+}
+
+.userhost {
+  color: #67e8f9;
+  font-weight: 600;
+  text-shadow: 0 0 6px rgba(103, 232, 249, 0.35);
+}
+
+.cwd {
+  color: #22c55e;
+  text-shadow: 0 0 6px rgba(34, 197, 94, 0.35);
+}
+
+.prompt-symbol {
+  color: cyan;
+  font-weight: bold;
+  font-size: 18px;
+  text-shadow: 0 0 12px rgba(244, 63, 94, 0.8);
+  margin-left: 4px;
+}
+
+.output {
+  margin-left: 18px;
+  color: #e5e7eb;
+  white-space: pre-wrap;
+  animation: fadeIn 0.25s ease-in;
+}
+
+pre.output {
+  margin-left: 18px;
+  white-space: pre;
+}
+
+pre.output a {
+  color: #22f7ff;
+  text-decoration: none;
+  text-shadow: 0 0 8px rgba(34, 247, 255, 0.55);
+  transition: text-shadow 0.25s ease, color 0.25s ease;
+}
+
+pre.output a:hover {
+  color: #67f8ff;
+  text-shadow: 0 0 14px rgba(34, 247, 255, 0.9);
+}
+
+.label {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.cursor {
+  color: #22c55e;
+  margin-left: 20px;
+  font-weight: bold;
+  animation: blink 1s steps(1) infinite;
+  text-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
