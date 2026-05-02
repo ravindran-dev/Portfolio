@@ -33,10 +33,8 @@ interface DesktopStore {
 export const useDesktopStore = create<DesktopStore>((set, get) => ({
   booted: false, // Will be set to true after boot sequence
   setBooted: (booted) => set({ booted }),
-  windows: {
-    explorer: { id: "explorer", title: "Finder", isOpen: true, isMinimized: false, isMaximized: false, zIndex: 100, workspaceId: 1 }
-  } as Record<AppId, WindowState>,
-  focusedWindow: "explorer",
+  windows: {} as Record<AppId, WindowState>,
+  focusedWindow: null,
   openWindow: (id, title) => set((state) => {
     const highestZ = Object.values(state.windows).reduce((max, w) => Math.max(max, w.zIndex), 0);
     if (state.windows[id]) {
@@ -94,6 +92,6 @@ export const useDesktopStore = create<DesktopStore>((set, get) => ({
   setActiveWorkspace: (ws) => set({ activeWorkspace: ws }),
   launcherOpen: false,
   toggleLauncher: () => set((state) => ({ launcherOpen: !state.launcherOpen })),
-  wallpaper: 'Techno-Geek', // Options: Space-Nebula, Tokyo_Pink, Dreamy-Aesthetic, Lofi-Desktop, Techno-Geek
+  wallpaper: 'Techno-Geek', // Options: Space-Nebula, Tokyo_Pink, Dreamy-Aesthetic, Lofi-Desktop, Techno-Geek, Premium-Wallpaper
   setWallpaper: (wp) => set({ wallpaper: wp })
 }));

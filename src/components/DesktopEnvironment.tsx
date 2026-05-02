@@ -13,6 +13,8 @@ import Explorer from "@/apps/Explorer";
 import Terminal from "@/apps/Terminal";
 import Resume from "@/apps/Resume";
 import Contact from "@/apps/Contact";
+import DesktopIcons from "./DesktopIcons";
+import HeroWidget from "./HeroWidget";
 
 const getWallpaperBg = (wallpaper: string) => {
   switch (wallpaper) {
@@ -26,6 +28,8 @@ const getWallpaperBg = (wallpaper: string) => {
       return "bg-[url('/assets/Lofi-Desktop-Man-Studying.png')]";
     case "Techno-Geek":
       return "bg-[url('/assets/Techno-Geek.png')]";
+    case "Premium-Wallpaper":
+      return "bg-[url('/assets/Premium-Wallpaper.png')]";
     default:
       return "bg-[#0a0a0a]";
   }
@@ -67,7 +71,10 @@ export default function DesktopEnvironment() {
           className="absolute inset-0 z-10"
         >
           <Waybar />
-          <WallpaperSwitcher />
+          
+          {/* Desktop Overlay Content */}
+          <HeroWidget />
+          <DesktopIcons />
           
           {/* Workspaces container (simulating Hyprland workspaces) */}
           <motion.div 

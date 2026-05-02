@@ -20,6 +20,9 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Ravindran S - AI Engineer Portfolio",
   description: "High-end interactive developer portfolio.",
+  icons: {
+    icon: '/assets/logo.png',
+  },
 };
 
 export default function RootLayout({

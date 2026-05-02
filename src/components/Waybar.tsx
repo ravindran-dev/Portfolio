@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDesktopStore } from "@/store/useDesktopStore";
 import { SiArchlinux, SiGithub } from "react-icons/si";
-import { FiWifi, FiBattery, FiBatteryCharging, FiPower, FiClock } from "react-icons/fi";
+import { FiWifi, FiBattery, FiBatteryCharging, FiPower, FiClock, FiImage } from "react-icons/fi";
 
 export default function Waybar() {
   const { activeWorkspace, setActiveWorkspace, wallpaper, setWallpaper } = useDesktopStore();
@@ -12,7 +12,24 @@ export default function Waybar() {
   const [batteryLevel, setBatteryLevel] = useState<number | null>(null);
   const [isCharging, setIsCharging] = useState(false);
   const [showWifi, setShowWifi] = useState(false);
+  const [showWifiDetails, setShowWifiDetails] = useState(false);
+  const [connectionInfo, setConnectionInfo] = useState<{ downlink?: number; effectiveType?: string }>({});
   const [showBattery, setShowBattery] = useState(false);
+  const [showWallpaper, setShowWallpaper] = useState(false);
+
+  useEffect(() => {
+    if ('connection' in navigator) {
+      const conn = (navigator as any).connection;
+      const updateConn = () => {
+        setConnectionInfo({
+          downlink: conn.downlink,
+          effectiveType: conn.effectiveType
+        });
+      };
+      updateConn();
+      conn.addEventListener('change', updateConn);
+    }
+  }, []);
 
   const wallpapers = ['Space-Nebula', 'Tokyo_Pink', 'Dreamy-Aesthetic', 'Lofi-Desktop', 'Techno-Geek'];
   
@@ -80,21 +97,82 @@ export default function Waybar() {
             </button>
           ))}
         </div>
-        <div className="w-px h-4 bg-white/20"></div>
       </div>
 
       {/* Right section */}
-      <div className="flex items-center gap-2 h-full relative">
-        <a href="https://github.com/ravindran-dev" target="_blank" rel="noreferrer" className="hover:bg-white/10 px-2 py-1 rounded transition-colors h-full flex items-center">
+      <div className="flex items-center gap-4">
+        {/* Wallpaper Menu Toggle */}
+        <div className="relative h-full flex items-center" onMouseEnter={() => setShowWallpaper(true)} onMouseLeave={() => setShowWallpaper(false)}>
+          <div className="hover:bg-white/10 px-2 py-1 rounded transition-colors h-full flex items-center cursor-pointer">
+            <FiImage className="text-sm" />
+          </div>
+          <AnimatePresence>
+            {showWallpaper && (
+              <motion.div 
+                initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 5 }}
+                transition={{ duration: 0.15 }}
+                className="absolute top-full mt-1 right-0 w-48 backdrop-blur-3xl bg-[#28282b]/95 rounded-xl border border-white/10 shadow-2xl z-[9001] py-2 font-sans text-[13px]"
+              >
+                <div className="text-xs text-white/50 px-4 pb-1 mb-1 border-b border-white/10 font-mono tracking-wider uppercase">Wallpapers</div>
+                <div className="px-2 flex flex-col gap-1">
+                  {[
+                    { id: "Space-Nebula", name: "Space Nebula" },
+                    { id: "Tokyo_Pink", name: "Tokyo Pink" },
+                    { id: "Dreamy-Aesthetic", name: "Dreamy Aesthetic" },
+                    { id: "Lofi-Desktop", name: "Lofi Desktop" },
+                    { id: "Techno-Geek", name: "Techno Geek" }
+                  ].map((wp) => (
+                    <button
+                      key={wp.id}
+                      onClick={() => setWallpaper(wp.id)}
+                      className={`text-left px-3 py-1.5 rounded-md text-[13px] transition-all font-mono ${
+                        wallpaper === wp.id ? "bg-cyan-500/20 text-cyan-400 border border-cyan-500/30" : "text-white/80 hover:bg-white/10 border border-transparent"
+                      }`}
+                    >
+                      {wp.name}
+                    </button>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        <a href="https://github.com/ravindran-dev" target="_blank" rel="noopener noreferrer" className="hover:bg-white/10 px-2 py-1 rounded transition-colors">
           <SiGithub className="text-sm" />
         </a>
         
         {/* WiFi Toggle */}
-        <div className="relative h-full flex items-center" onMouseEnter={() => setShowWifi(true)} onMouseLeave={() => setShowWifi(false)}>
-          <div className="hover:bg-white/10 px-2 py-1 rounded transition-colors h-full flex items-center cursor-pointer">
+        <div className="relative h-full flex items-center">
+          <div 
+            onClick={() => setShowWifi(!showWifi)}
+            onMouseEnter={() => setShowWifiDetails(true)}
+            onMouseLeave={() => setShowWifiDetails(false)}
+            className={`px-2 py-1 rounded transition-colors h-full flex items-center cursor-pointer ${showWifi ? 'bg-white/20' : 'hover:bg-white/10'}`}
+          >
             <FiWifi className="text-[14px]" />
           </div>
+
           <AnimatePresence>
+            {showWifiDetails && !showWifi && (
+              <motion.div
+                initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 5 }}
+                className="absolute top-full mt-1 right-0 px-3 py-2 backdrop-blur-3xl bg-[#28282b]/95 rounded-lg border border-white/10 shadow-xl z-[9001] whitespace-nowrap"
+              >
+                <div className="flex flex-col gap-1">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_5px_rgba(34,197,94,0.5)]"></div>
+                    <span className="font-bold text-xs">Office250</span>
+                  </div>
+                  <div className="text-[10px] text-white/50 flex flex-col">
+                    <span>IP: 192.168.1.128</span>
+                    <span>Speed: {connectionInfo.downlink ? `${connectionInfo.downlink} Mbps` : '866.7 Mbps'}</span>
+                    <span>Signal: Strong</span>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
             {showWifi && (
               <motion.div 
                 initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 5 }}
@@ -103,7 +181,10 @@ export default function Waybar() {
               >
                 <div className="flex items-center justify-between px-4 pb-2 border-b border-white/10 mb-2">
                   <span className="font-semibold">Wi-Fi</span>
-                  <div className="w-8 h-4 bg-blue-500 rounded-full flex items-center justify-end px-[2px] shadow-inner">
+                  <div 
+                    onClick={(e) => { e.stopPropagation(); }}
+                    className="w-8 h-4 bg-blue-500 rounded-full flex items-center justify-end px-[2px] shadow-inner cursor-pointer"
+                  >
                     <div className="w-3.5 h-3.5 bg-white rounded-full shadow-sm"></div>
                   </div>
                 </div>

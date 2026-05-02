@@ -3,14 +3,35 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDesktopStore, AppId } from "@/store/useDesktopStore";
-import { FiSearch, FiFolder, FiTerminal, FiFileText, FiMail } from "react-icons/fi";
+import { FiSearch, FiFolder, FiTerminal, FiFileText, FiMail, FiCode } from "react-icons/fi";
+import { projectsData } from "@/data/projectsData";
 
 const apps = [
-  { id: "explorer", label: "Finder", icon: FiFolder },
-  { id: "terminal", label: "Terminal", icon: FiTerminal },
-  { id: "resume", label: "Resume", icon: FiFileText },
-  { id: "contact", label: "Contact", icon: FiMail },
+  { id: "explorer", label: "Finder", icon: FiFolder, type: "app" },
+  { id: "terminal", label: "Terminal", icon: FiTerminal, type: "app" },
+  { id: "resume", label: "Resume", icon: FiFileText, type: "app" },
+  { id: "contact", label: "Contact", icon: FiMail, type: "app" },
 ];
+
+const finderFiles = [
+  { id: "about", label: "About Me", icon: FiFileText, type: "file" },
+  { id: "skills", label: "Skills", icon: FiCode, type: "file" },
+  { id: "projects-folder", label: "Projects Directory", icon: FiFolder, type: "folder" },
+  { id: "experience", label: "Experience", icon: FiTerminal, type: "file" },
+  { id: "achievements-folder", label: "Achievements Directory", icon: FiFolder, type: "folder" },
+  { id: "leetcode", label: "LeetCode Knight", icon: FiFileText, type: "file" },
+  { id: "tiforge", label: "Ti Forge 2026", icon: FiFileText, type: "file" },
+  { id: "sustainability", label: "Sustainability Hackathon", icon: FiFileText, type: "file" },
+  { id: "icpc", label: "ICPC 2025", icon: FiFileText, type: "file" },
+  ...Object.keys(projectsData).map((key) => ({
+    id: key,
+    label: projectsData[key as keyof typeof projectsData].title,
+    icon: FiCode,
+    type: "project"
+  }))
+];
+
+const allItems = [...apps, ...finderFiles];
 
 export default function RofiLauncher() {
   const { launcherOpen, toggleLauncher, openWindow } = useDesktopStore();
@@ -19,8 +40,8 @@ export default function RofiLauncher() {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Toggle on Ctrl+Space or Super(Meta)
-      if ((e.ctrlKey && e.code === 'Space') || e.code === 'MetaLeft' || e.code === 'MetaRight') {
+      // Toggle on Ctrl+Space
+      if (e.ctrlKey && e.code === 'Space') {
         e.preventDefault();
         toggleLauncher();
       }
@@ -39,13 +60,18 @@ export default function RofiLauncher() {
     }
   }, [launcherOpen]);
 
-  const filteredApps = apps.filter(app => 
-    app.label.toLowerCase().includes(search.toLowerCase()) || 
-    app.id.toLowerCase().includes(search.toLowerCase())
+  const filteredApps = allItems.filter(item => 
+    item.label.toLowerCase().includes(search.toLowerCase()) || 
+    item.id.toLowerCase().includes(search.toLowerCase())
   );
 
-  const handleLaunch = (id: AppId, label: string) => {
-    openWindow(id, label);
+  const handleLaunch = (item: any) => {
+    if (item.type === "app") {
+      openWindow(item.id as AppId, item.label);
+    } else {
+      openWindow("explorer", "Finder");
+      setTimeout(() => window.dispatchEvent(new CustomEvent('open-finder-file', { detail: { id: item.id, type: item.type } })), 100);
+    }
     toggleLauncher();
   };
 
@@ -80,7 +106,7 @@ export default function RofiLauncher() {
                 className="w-full bg-transparent border-none outline-none text-foreground text-lg font-sans placeholder-foreground/40"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && filteredApps.length > 0) {
-                    handleLaunch(filteredApps[0].id, filteredApps[0].label);
+                    handleLaunch(filteredApps[0]);
                   }
                 }}
               />
@@ -92,7 +118,7 @@ export default function RofiLauncher() {
                 filteredApps.map((app, index) => (
                   <div
                     key={app.id}
-                    onClick={() => handleLaunch(app.id, app.label)}
+                    onClick={() => handleLaunch(app)}
                     className={`flex items-center gap-4 p-3 rounded-xl cursor-pointer transition-all ${
                       index === 0 && search.length > 0 ? "bg-primary/20 border border-primary/30" : "hover:bg-surface-container-highest border border-transparent"
                     }`}
@@ -100,7 +126,10 @@ export default function RofiLauncher() {
                     <div className="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary border border-white/5">
                       <app.icon className="text-xl" />
                     </div>
-                    <span className="font-mono text-foreground/90">{app.label}</span>
+                    <div className="flex flex-col">
+                      <span className="font-mono text-foreground/90">{app.label}</span>
+                      <span className="text-[10px] text-foreground/40 uppercase tracking-wider">{app.type}</span>
+                    </div>
                   </div>
                 ))
               ) : (

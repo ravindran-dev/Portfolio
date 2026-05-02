@@ -7,32 +7,46 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const projects = [
   {
-    id: "MachineGuard",
-    name: "MachineGuard",
-    description: "An advanced system for monitoring and securing edge AI deployments.",
-    tech: ["Python", "TensorFlow", "FastAPI"],
-    repo: "https://github.com/ravindran-dev/MachineGuard"
-  },
-  {
-    id: "MicroDet",
-    name: "MicroDet",
-    description: "Lightweight object detection model optimized for microcontrollers.",
-    tech: ["C++", "TensorFlow Lite", "ESP32"],
-    repo: "https://github.com/ravindran-dev/MicroDet"
-  },
-  {
     id: "GenuineGate",
     name: "GenuineGate",
-    description: "Deep-learning based hardware authentication gateway.",
-    tech: ["Rust", "PyTorch", "gRPC"],
+    description: "Real-time bot detection system with 40% faster response time.",
+    tech: ["Golang", "Gin", "WebSocket", "PostgreSQL"],
     repo: "https://github.com/ravindran-dev/GenuineGate"
   },
   {
-    id: "LCA-Tool",
-    name: "LCA-Tool",
-    description: "Lifecycle Assessment tool for tracking carbon footprints of AI models.",
-    tech: ["React", "Node.js", "MongoDB"],
-    repo: "https://github.com/ravindran-dev/LCA-Tool"
+    id: "Microdet",
+    name: "Microdet",
+    description: "Drone-based object detection for border security. Achieved 92% accuracy in Smart India Hackathon.",
+    tech: ["PyTorch", "OpenCV", "YOLOv8", "CNN"],
+    repo: "https://github.com/ravindran-dev/Microdet"
+  },
+  {
+    id: "Mining-LCA-Tool",
+    name: "Mining LCA Tool",
+    description: "Life cycle assessment platform for mining industry using RAG and Vector DB.",
+    tech: ["Python", "React", "RAG", "Vector DB"],
+    repo: "https://github.com/ravindran-dev/Mining-LCA-Tool"
+  },
+  {
+    id: "SpamZero",
+    name: "SpamZero",
+    description: "Real-time spam detection system achieving 95% accuracy.",
+    tech: ["Scikit-learn", "Flask", "React"],
+    repo: "https://github.com/ravindran-dev/SpamZero"
+  },
+  {
+    id: "SmartSpend",
+    name: "SmartSpend",
+    description: "Expense tracking application with ML-powered financial insights.",
+    tech: ["Flask", "React", "ML algorithms"],
+    repo: "https://github.com/ravindran-dev/SmartSpend"
+  },
+  {
+    id: "Linux-Tools",
+    name: "Linux Tools & Dotfiles",
+    description: "Neovim, Tmux, and system configurations. Rust TUI apps for developer productivity.",
+    tech: ["Rust", "Bash", "Lua"],
+    repo: "https://github.com/ravindran-dev/dotfiles"
   }
 ];
 
