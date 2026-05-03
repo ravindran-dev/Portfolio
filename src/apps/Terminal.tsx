@@ -16,7 +16,7 @@ export default function Terminal() {
   ]);
   const [input, setInput] = useState("");
   const bottomRef = useRef<HTMLDivElement>(null);
-  
+
   const scrollToBottom = () => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -41,6 +41,7 @@ export default function Terminal() {
             <div><span className="text-cyan-400 font-bold w-20 inline-block">clear</span> - Clear the terminal</div>
             <div><span className="text-cyan-400 font-bold w-20 inline-block">contact</span> - Show contact links</div>
             <div><span className="text-cyan-400 font-bold w-20 inline-block">projects</span> - List portfolio projects</div>
+            <div><span className="text-cyan-400 font-bold w-20 inline-block">reboot</span> - Restart the system</div>
           </div>
         );
       case "whoami":
@@ -48,7 +49,7 @@ export default function Terminal() {
       case "fastfetch":
         return (
           <pre className="text-white/80 font-mono">
-{`OS: Arch Linux x86_64
+            {`OS: Arch Linux x86_64
 Kernel: 6.18.7
 Shell: zsh
 WM: Hyprland
@@ -67,15 +68,15 @@ DevOps: Docker, Git, Linux, CI/CD`}
       case "./contact.sh":
         return (
           <div className="flex gap-4 text-cyan-400">
-            <a href="https://github.com/ravindran-dev" target="_blank" className="hover:underline hover:text-white">GitHub</a> | 
-            <a href="https://www.linkedin.com/in/ravindran-s-982702327" target="_blank" className="hover:underline hover:text-white">LinkedIn</a> | 
+            <a href="https://github.com/ravindran-dev" target="_blank" className="hover:underline hover:text-white">GitHub</a> |
+            <a href="https://www.linkedin.com/in/ravindran-s-982702327" target="_blank" className="hover:underline hover:text-white">LinkedIn</a> |
             <a href="mailto:ravindrans.dev@gmail.com" className="hover:underline hover:text-white">Email</a>
           </div>
         );
       case "projects":
         return (
           <pre className="text-white/80 font-mono">
-{`projects/
+            {`projects/
 ├── GenuineGate (Golang + WebSocket)
 ├── Microdet (PyTorch + OpenCV)
 ├── Mining LCA Tool (RAG + Full-Stack)
@@ -84,6 +85,9 @@ DevOps: Docker, Git, Linux, CI/CD`}
 └── Linux Tools & Dotfiles`}
           </pre>
         );
+      case "reboot":
+        setTimeout(() => window.location.reload(), 1000);
+        return "System rebooting...";
       case "":
         return "";
       default:
@@ -103,7 +107,7 @@ DevOps: Docker, Git, Linux, CI/CD`}
 
     const cmd = input;
     setInput("");
-    
+
     // Add input to history
     const inputId = Date.now().toString();
     setHistory(prev => [...prev, { id: inputId, type: "input", content: cmd }]);
@@ -111,10 +115,10 @@ DevOps: Docker, Git, Linux, CI/CD`}
     // Execute and add output to history
     const output = executeCommand(cmd);
     if (output !== "") {
-      setHistory(prev => [...prev, { 
-        id: (Date.now() + 1).toString(), 
-        type: "output", 
-        content: output 
+      setHistory(prev => [...prev, {
+        id: (Date.now() + 1).toString(),
+        type: "output",
+        content: output
       }]);
     }
   };
@@ -138,8 +142,8 @@ DevOps: Docker, Git, Linux, CI/CD`}
   );
 
   return (
-    <Window id="terminal" title="terminal - bash" defaultWidth={860} defaultHeight={600}>
-      <div 
+    <Window id="terminal" title="kitty - Zsh" defaultWidth={860} defaultHeight={600}>
+      <div
         className="w-full h-full bg-[#0a0a0a]/93 backdrop-blur-3xl p-6 font-mono text-[14px] leading-[1.65] text-[#e5e7eb] overflow-auto cursor-text shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)]"
         onClick={() => document.getElementById("terminal-input")?.focus()}
       >

@@ -16,20 +16,42 @@ export default function Waybar() {
   const [connectionInfo, setConnectionInfo] = useState<{ downlink?: number; effectiveType?: string }>({});
   const [showBattery, setShowBattery] = useState(false);
   const [showWallpaper, setShowWallpaper] = useState(false);
+  const [wifiNetworks, setWifiNetworks] = useState([
+    { name: 'Hypersource', signal: 'Strong', locked: true },
+    { name: 'Family Office', signal: 'Medium', locked: true },
+    { name: 'drpatramsey-5G', signal: 'Strong', locked: true }
+  ]);
 
   useEffect(() => {
-    if ('connection' in navigator) {
-      const conn = (navigator as any).connection;
-      const updateConn = () => {
+    const updateConn = () => {
+      if ('connection' in navigator) {
+        const conn = (navigator as any).connection;
         setConnectionInfo({
-          downlink: conn.downlink,
+          downlink: conn.downlink + (Math.random() * 0.4 - 0.2), // Simulate real-time jitter
           effectiveType: conn.effectiveType
         });
-      };
-      updateConn();
-      conn.addEventListener('change', updateConn);
+      }
+    };
+
+    updateConn();
+    const interval = setInterval(updateConn, 3000); // Update every 3s for "real-time" feel
+    
+    if ('connection' in navigator) {
+      (navigator as any).connection.addEventListener('change', updateConn);
     }
+    
+    return () => clearInterval(interval);
   }, []);
+
+  // Simulate WiFi scanning
+  useEffect(() => {
+    if (showWifi) {
+      const interval = setInterval(() => {
+        setWifiNetworks(prev => [...prev].sort(() => Math.random() - 0.5));
+      }, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [showWifi]);
 
   const wallpapers = ['Space-Nebula', 'Tokyo_Pink', 'Dreamy-Aesthetic', 'Lofi-Desktop', 'Techno-Geek'];
   
@@ -50,17 +72,29 @@ export default function Waybar() {
   }, []);
 
   useEffect(() => {
-    if ('getBattery' in navigator) {
-      (navigator as any).getBattery().then((battery: any) => {
-        const updateBattery = () => {
-          setBatteryLevel(Math.round(battery.level * 100));
-          setIsCharging(battery.charging);
-        };
-        updateBattery();
-        battery.addEventListener('levelchange', updateBattery);
-        battery.addEventListener('chargingchange', updateBattery);
-      });
-    }
+    const fetchBattery = async () => {
+      try {
+        if ('getBattery' in navigator) {
+          const battery = await (navigator as any).getBattery();
+          const updateBattery = () => {
+            setBatteryLevel(Math.round(battery.level * 100));
+            setIsCharging(battery.charging);
+          };
+          updateBattery();
+          battery.addEventListener('levelchange', updateBattery);
+          battery.addEventListener('chargingchange', updateBattery);
+        } else {
+          // Fallback for browsers/OS that don't support getBattery (like some Arch configs or Safari/Firefox)
+          setBatteryLevel(100);
+          setIsCharging(true);
+        }
+      } catch (e) {
+        console.error("Battery API error:", e);
+        setBatteryLevel(100);
+        setIsCharging(true);
+      }
+    };
+    fetchBattery();
   }, []);
 
   return (
@@ -68,7 +102,7 @@ export default function Waybar() {
       initial={{ y: -50 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="fixed top-2 left-4 right-4 h-10 backdrop-blur-2xl bg-[#1d1d1f]/70 rounded-2xl z-[9000] flex items-center justify-between px-4 font-sans text-xs text-white border border-white/10 shadow-xl transition-all duration-300 hover:bg-[#1d1d1f]/80 hover:shadow-2xl hover:border-white/20"
+      className="fixed top-2 left-4 right-4 h-12 backdrop-blur-2xl bg-[#1d1d1f]/70 rounded-2xl z-[9000] flex items-center justify-between px-6 font-sans text-xs text-white border border-white/10 shadow-xl transition-all duration-300 hover:bg-[#1d1d1f]/80 hover:shadow-2xl hover:border-white/20"
     >
       {/* Left section */}
       <div className="flex items-center gap-4">
@@ -204,11 +238,11 @@ export default function Waybar() {
 
                 <div className="px-4 pt-2 pb-1 text-white/50 text-[11px] font-semibold tracking-wider uppercase mt-1 mb-1 border-t border-white/10">Other Networks</div>
                 <div className="px-2">
-                  {['Hypersource', 'Family Office', 'drpatramsey-5G'].map(net => (
-                    <div key={net} className="flex items-center gap-3 px-2 py-1.5 rounded-md hover:bg-white/10 cursor-pointer">
+                  {wifiNetworks.map(net => (
+                    <div key={net.name} className="flex items-center gap-3 px-2 py-1.5 rounded-md hover:bg-white/10 cursor-pointer">
                       <FiWifi className="text-sm opacity-70" />
-                      <span className="flex-1 truncate">{net}</span>
-                      <div className="w-3 h-3 border border-white/50 rounded-sm flex items-center justify-center text-[8px] opacity-70">🔒</div>
+                      <span className="flex-1 truncate">{net.name}</span>
+                      {net.locked && <div className="w-3 h-3 border border-white/50 rounded-sm flex items-center justify-center text-[8px] opacity-70">🔒</div>}
                     </div>
                   ))}
                 </div>
@@ -225,9 +259,18 @@ export default function Waybar() {
 
         {/* Battery Toggle */}
         <div className="relative h-full flex items-center" onMouseEnter={() => setShowBattery(true)} onMouseLeave={() => setShowBattery(false)}>
-          <div className="flex items-center gap-1 cursor-pointer hover:bg-white/10 px-2 py-1 rounded transition-colors h-full">
-            {batteryLevel !== null && <span>{batteryLevel}%</span>}
-            {isCharging ? <FiBatteryCharging className="text-[14px]" /> : <FiBattery className="text-[14px]" />}
+          <div className="flex items-center gap-1.5 cursor-pointer hover:bg-white/10 px-2.5 py-1.5 rounded-lg transition-colors h-full">
+            {batteryLevel !== null && <span className="font-medium">{batteryLevel}%</span>}
+            {isCharging ? (
+              <FiBatteryCharging className="text-[16px] text-green-400 drop-shadow-[0_0_8px_rgba(74,222,128,0.5)]" />
+            ) : (
+              <div className="relative flex items-center justify-center">
+                <FiBattery className="text-[18px] text-white/90" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-[10px] h-[5px] bg-white rounded-[1px] ml-[-1px]"></div>
+                </div>
+              </div>
+            )}
           </div>
           <AnimatePresence>
             {showBattery && (
@@ -256,7 +299,8 @@ export default function Waybar() {
           </AnimatePresence>
         </div>
 
-        <div className="flex items-center gap-1.5 hover:bg-white/10 px-2 py-1 rounded transition-colors h-full cursor-pointer">
+        <div className="flex items-center gap-2 hover:bg-white/10 px-3 py-1.5 rounded-lg transition-colors h-full cursor-pointer">
+          <FiClock className="text-[14px] text-white/70" />
           <span className="font-semibold">{time || "00:00"}</span>
         </div>
       </div>
