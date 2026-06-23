@@ -91,7 +91,7 @@ export default function AboutPage() {
       </motion.div>
 
       {/* Resume CTA */}
-      <a href="/assets/Ravindran_S_Resume_v2.docx.pdf" target="_blank" rel="noopener noreferrer" className="w-full block mb-8">
+      <a href="/assets/Resume%20(2).pdf" target="_blank" rel="noopener noreferrer" className="w-full block mb-8">
         <motion.button 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

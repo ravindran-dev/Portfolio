@@ -5,7 +5,7 @@ export default function Resume() {
     <Window id="resume" title="resume.pdf" defaultWidth={800} defaultHeight={900}>
       <div className="w-full h-full bg-white flex flex-col relative overflow-hidden rounded-md shadow-inner">
         <iframe 
-          src="/assets/Ravindran_S_Resume_v2.docx.pdf" 
+          src="/assets/Resume%20(2).pdf" 
           className="w-full h-full border-none"
           title="Resume"
         />
