@@ -3,17 +3,35 @@
 import { motion } from 'framer-motion';
 import { IoMailOutline, IoLogoGithub, IoLogoLinkedin, IoSend } from 'react-icons/io5';
 import { useState } from 'react';
+import { sendContactEmail } from '@/actions/sendEmail';
 
 export default function ContactPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [isSending, setIsSending] = useState(false);
+  const [status, setStatus] = useState<string | null>(null);
 
-  const handleSend = () => {
-    if (!name || !message) return;
-    const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-    window.location.href = `mailto:ravindrans.dev@gmail.com?subject=${subject}&body=${body}`;
+  const handleSend = async () => {
+    if (!name || !email || !message) return;
+    setIsSending(true);
+    setStatus(null);
+    try {
+      const res = await sendContactEmail(name, email, message);
+      if (res.success) {
+        setStatus("success");
+        setName('');
+        setEmail('');
+        setMessage('');
+        setTimeout(() => setStatus(null), 5000);
+      } else {
+        setStatus(res.error || "Failed to send message");
+      }
+    } catch (err) {
+      setStatus("Network error. Please try again.");
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -75,6 +93,25 @@ export default function ContactPage() {
         <h3 className="text-[13px] font-bold text-[#839493] uppercase tracking-wider ml-4 mb-2">Send Message</h3>
         
         <div className="w-full rounded-[24px] bg-[#1a1c20]/50 backdrop-blur-xl border border-white/10 p-5 flex flex-col gap-4">
+          {status === "success" && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="p-3 bg-green-500/10 border border-green-500/20 rounded-xl text-green-400 text-xs font-mono text-center"
+            >
+              ✓ Sent directly to server!
+            </motion.div>
+          )}
+          {status && status !== "success" && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-xs font-mono text-center"
+            >
+              ⚠️ Error: {status}
+            </motion.div>
+          )}
+
           <div className="bg-[#111318] rounded-[16px] border border-white/5 overflow-hidden">
             <input 
               type="text" 
@@ -103,11 +140,22 @@ export default function ContactPage() {
           </div>
           
           <motion.button 
-            whileTap={{ scale: 0.95 }}
+            disabled={isSending}
+            whileTap={{ scale: isSending ? 1 : 0.95 }}
             onClick={handleSend}
-            className="w-full py-3.5 rounded-full bg-gradient-to-r from-[#00fbfb] to-[#00dddd] text-[#002020] font-bold text-[16px] shadow-[0_0_15px_rgba(0,251,251,0.3)] flex items-center justify-center gap-2"
+            className={`w-full py-3.5 rounded-full bg-gradient-to-r from-[#00fbfb] to-[#00dddd] text-[#002020] font-bold text-[16px] shadow-[0_0_15px_rgba(0,251,251,0.3)] flex items-center justify-center gap-2 ${
+              isSending ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           >
-            Send <IoSend size={16} />
+            {isSending ? (
+              <>
+                Sending... <div className="w-4 h-4 border-2 border-[#002020] border-t-transparent rounded-full animate-spin" />
+              </>
+            ) : (
+              <>
+                Send <IoSend size={16} />
+              </>
+            )}
           </motion.button>
         </div>
       </motion.div>

@@ -39,7 +39,7 @@ export default function AboutPage() {
           
           <div>
             <p className="text-[#b9cac9] text-[15px] leading-relaxed">
-              I'm an AI/ML Engineer passionate about building intelligent, scalable systems. With experience spanning full-stack development to deep learning, I specialize in crafting solutions that bridge the gap between complex algorithms and seamless user experiences.
+              AI/ML Engineer specializing in computer vision, edge AI and scalable systems. Proven track record of building high-performance models and full-stack AI applications, with hackathon wins and open-source contributions.
             </p>
           </div>
         </div>

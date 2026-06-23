@@ -7,6 +7,7 @@ import Projects from "./Projects";
 import Experience from "./Experience";
 import Achievements from "./Achievements";
 import { projectsData } from "@/data/projectsData";
+import ProjectCaseStudy from "@/components/ProjectCaseStudy";
 
 import { 
   FiClock, FiUsers, FiGrid, FiDownload, FiMonitor, FiFileText, 
@@ -120,7 +121,7 @@ export default function Explorer() {
       label: "LeetCode Knight.pages", 
       type: "file", 
       icon: <div className="w-16 h-16 bg-[#2d2d2d] rounded shadow-sm border border-white/10 flex items-center justify-center text-yellow-500 text-3xl"><FiAward /></div>, 
-      content: "Knight Status on LeetCode: Achieved a peak contest rating of 1,978 (Top 3% globally). Solved 500+ problems across various categories including Dynamic Programming, Graph Theory, and Advanced Algorithms. Consistently ranked in the top 500 in weekly and bi-weekly contests." 
+      content: "Knight Status on LeetCode: Achieved a peak contest rating of 2071 (Knight badge holder). Solved 500+ problems across various categories including Dynamic Programming, Graph Theory, and Advanced Algorithms. Consistently ranked in the top 500 in weekly and bi-weekly contests." 
     },
     { 
       id: "tiforge", 
@@ -297,44 +298,28 @@ export default function Explorer() {
 
             {/* Content View */}
             {!openedFile && !openedProject ? (
-              <div className="p-8 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-x-4 gap-y-10 place-items-start overflow-y-auto content-start flex-1">
-                {filteredItems.map(item => (
-                  <div key={item.id} onDoubleClick={() => handleDoubleClick(item)} className="flex flex-col items-center gap-2 cursor-pointer group w-24 p-2 rounded-lg hover:bg-white/5 transition-all">
-                    <div className="drop-shadow-sm group-hover:scale-105 group-active:scale-95 transition-transform">{item.icon}</div>
-                    <span className="text-[12px] text-white/80 text-center font-medium group-hover:bg-[#0058d0] group-hover:text-white px-1.5 py-0.5 rounded transition-colors line-clamp-2">{item.label}</span>
-                  </div>
-                ))}
-                {filteredItems.length === 0 && (
-                  <div className="col-span-full flex flex-col items-center justify-center mt-20 text-white/40 w-full">
-                    <FiSearch className="text-4xl mb-4 opacity-50" />
-                    <p>No results found for "{searchQuery}"</p>
-                  </div>
-                )}
-              </div>
-            ) : openedProject ? (
-              <div className="flex-1 overflow-y-auto bg-[#1e1e1e] p-10">
-                <div className="max-w-4xl mx-auto">
-                  <div className="bg-[#2d2d2d] rounded-2xl p-8 border border-white/10 shadow-2xl overflow-hidden relative">
-                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-green-500 opacity-50" />
-                    <div className="flex items-start justify-between mb-8">
-                      <div>
-                        <h1 className="text-4xl font-black mb-2 tracking-tight text-white">{projectsData[openedProject as keyof typeof projectsData]?.title}</h1>
-                        <p className="text-xl text-white/60 font-medium">{projectsData[openedProject as keyof typeof projectsData]?.description}</p>
-                      </div>
-                      <div className="flex gap-2">
-                        {projectsData[openedProject as keyof typeof projectsData]?.tech.map(t => (
-                          <span key={t} className="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold uppercase tracking-widest text-white/40 border border-white/5">{t}</span>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="prose prose-invert max-w-none prose-pre:bg-black/30 prose-pre:border prose-pre:border-white/5 prose-headings:text-white/90 prose-p:text-white/70 prose-strong:text-white/90 prose-li:text-white/70">
-                      <div className="whitespace-pre-wrap font-sans text-sm leading-relaxed opacity-90">
-                        {projectsData[openedProject as keyof typeof projectsData]?.content}
-                      </div>
-                    </div>
-                  </div>
+              currentFolder === "achievements-folder" ? (
+                <div className="flex-1 overflow-y-auto bg-[#131316]/95 text-white m-4 rounded-xl p-2 shadow-inner border border-white/10">
+                  <Achievements />
                 </div>
-              </div>
+              ) : (
+                <div className="p-8 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-x-4 gap-y-10 place-items-start overflow-y-auto content-start flex-1">
+                  {filteredItems.map(item => (
+                    <div key={item.id} onDoubleClick={() => handleDoubleClick(item)} className="flex flex-col items-center gap-2 cursor-pointer group w-24 p-2 rounded-lg hover:bg-white/5 transition-all">
+                      <div className="drop-shadow-sm group-hover:scale-105 group-active:scale-95 transition-transform">{item.icon}</div>
+                      <span className="text-[12px] text-white/80 text-center font-medium group-hover:bg-[#0058d0] group-hover:text-white px-1.5 py-0.5 rounded transition-colors line-clamp-2">{item.label}</span>
+                    </div>
+                  ))}
+                  {filteredItems.length === 0 && (
+                    <div className="col-span-full flex flex-col items-center justify-center mt-20 text-white/40 w-full">
+                      <FiSearch className="text-4xl mb-4 opacity-50" />
+                      <p>No results found for "{searchQuery}"</p>
+                    </div>
+                  )}
+                </div>
+              )
+            ) : openedProject ? (
+              <ProjectCaseStudy projectId={openedProject} />
             ) : (
               <div className="flex-1 overflow-y-auto bg-[#1e1e1e] p-8">
                 <div className="max-w-3xl mx-auto">

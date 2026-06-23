@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion, useDragControls } from "framer-motion";
 import { useDesktopStore, AppId } from "@/store/useDesktopStore";
 import { FiX, FiMinus, FiMaximize2 } from "react-icons/fi";
@@ -28,6 +28,27 @@ export default function Window({
   const { closeWindow, minimizeWindow, maximizeWindow, focusWindow, focusedWindow } = useDesktopStore();
   const dragControls = useDragControls();
   const windowRef = useRef<HTMLDivElement>(null);
+  
+  const [initPos, setInitPos] = useState({ x: 100, y: 100 });
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+      const x = (screenWidth - defaultWidth) / 2;
+      const y = (screenHeight - defaultHeight - 40) / 2;
+
+      // Cascading offset based on window id
+      const windowOrder = ["explorer", "terminal", "resume", "contact"];
+      const orderIndex = windowOrder.indexOf(id);
+      const offset = orderIndex >= 0 ? orderIndex * 28 : 0;
+
+      setInitPos({
+        x: Math.max(20, x + offset),
+        y: Math.max(60, y + offset)
+      });
+    }
+  }, [defaultWidth, defaultHeight, id]);
 
   if (!windowState || !windowState.isOpen) return null;
 
@@ -44,11 +65,16 @@ export default function Window({
       ref={windowRef}
       drag={!windowState.isMaximized}
       dragControls={dragControls}
-      dragConstraints={{ top: 0, bottom: window.innerHeight - 50, left: -window.innerWidth + 100, right: window.innerWidth - 100 }}
+      dragConstraints={{ 
+        top: typeof window !== "undefined" ? -initPos.y - 20 : -100, 
+        bottom: typeof window !== "undefined" ? window.innerHeight - initPos.y - 60 : 500, 
+        left: typeof window !== "undefined" ? -initPos.x - defaultWidth + 100 : -500, 
+        right: typeof window !== "undefined" ? window.innerWidth - initPos.x - 100 : 500 
+      }}
       dragElastic={0}
       dragListener={false}
       dragMomentum={false}
-      initial={{ scale: 0.95, opacity: 0 }}
+      initial={{ scale: 0.92, opacity: 0 }}
       animate={
         windowState.isMaximized
           ? { width: "100vw", height: "calc(100vh - 40px)", top: 40, left: 0, x: 0, y: 0, scale: 1, opacity: 1 }
@@ -56,18 +82,20 @@ export default function Window({
           ? { scale: 0, opacity: 0, y: 200 }
           : { scale: 1, opacity: 1 }
       }
-      exit={{ scale: 0.95, opacity: 0, filter: "blur(10px)" }}
-      transition={{ type: "spring", damping: 25, stiffness: 300 }}
+      exit={{ scale: 0.92, opacity: 0, filter: "blur(10px)" }}
+      transition={{ type: "spring", damping: 26, stiffness: 220 }}
       onPointerDown={() => focusWindow(id)}
       style={{ 
         zIndex: windowState.zIndex,
         width: windowState.isMaximized ? undefined : defaultWidth,
         height: windowState.isMaximized ? undefined : defaultHeight,
+        left: windowState.isMaximized ? undefined : initPos.x,
+        top: windowState.isMaximized ? undefined : initPos.y,
         ...(isMacosDark ? {
-          background: "rgba(30, 30, 30, 0.78)",
+          background: "rgba(22, 22, 26, 0.72)",
           backdropFilter: "blur(40px)",
           WebkitBackdropFilter: "blur(40px)",
-          boxShadow: isFocused ? "0 30px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05)" : "0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.05)",
+          boxShadow: isFocused ? "0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)" : "0 20px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06)",
           borderRadius: "14px"
         } : {})
       }}

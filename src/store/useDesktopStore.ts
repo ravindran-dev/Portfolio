@@ -36,7 +36,7 @@ export const useDesktopStore = create<DesktopStore>((set, get) => ({
   windows: {} as Record<AppId, WindowState>,
   focusedWindow: null,
   openWindow: (id, title) => set((state) => {
-    const highestZ = Object.values(state.windows).reduce((max, w) => Math.max(max, w.zIndex), 0);
+    const highestZ = Object.values(state.windows).reduce((max, w) => Math.max(max, w.zIndex), 99);
     if (state.windows[id]) {
       // If already exists, just focus, unminimize and bring to front. Also move to current workspace.
       return {
@@ -79,7 +79,7 @@ export const useDesktopStore = create<DesktopStore>((set, get) => ({
   focusWindow: (id) => set((state) => {
     if (!state.windows[id]?.isOpen) return state;
     if (state.focusedWindow === id) return state; // already focused
-    const highestZ = Object.values(state.windows).reduce((max, w) => Math.max(max, w.zIndex), 0);
+    const highestZ = Object.values(state.windows).reduce((max, w) => Math.max(max, w.zIndex), 99);
     return {
       windows: {
         ...state.windows,
@@ -92,6 +92,6 @@ export const useDesktopStore = create<DesktopStore>((set, get) => ({
   setActiveWorkspace: (ws) => set({ activeWorkspace: ws }),
   launcherOpen: false,
   toggleLauncher: () => set((state) => ({ launcherOpen: !state.launcherOpen })),
-  wallpaper: 'Techno-Geek', // Options: Space-Nebula, Tokyo_Pink, Dreamy-Aesthetic, Lofi-Desktop, Techno-Geek, Premium-Wallpaper
+  wallpaper: 'Lofi-Desktop', // Options: Space-Nebula, Tokyo_Pink, Dreamy-Aesthetic, Lofi-Desktop, Techno-Geek, Premium-Wallpaper
   setWallpaper: (wp) => set({ wallpaper: wp })
 }));

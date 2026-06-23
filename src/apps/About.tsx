@@ -20,10 +20,10 @@ export default function About() {
         </div>
       </div>
       <p className="text-lg leading-relaxed mb-4 text-white/80">
-        AI/ML engineer focused on scalable systems, edge AI, computer vision, and production-ready applications.
+        AI/ML Engineer specializing in computer vision, edge AI and scalable systems. I have a proven track record of building high-performance models and full-stack AI applications, with hackathon wins and open-source contributions.
       </p>
       <p className="text-lg leading-relaxed mb-4 text-white/80">
-        I build high-performance tools and platforms. My work bridges the gap between complex machine learning models and robust backend architectures.
+        Currently pursuing B.E. in Computer Science and Engineering (AI & ML) at Chennai Institute of Technology (Sept 2024 – Present) with a CGPA of 9.24/10.
       </p>
       <div className="mt-8 border-l-4 border-blue-500 pl-4 bg-white/5 p-4 rounded-r-lg">
         <p className="text-sm font-mono text-white/90 m-0 italic">

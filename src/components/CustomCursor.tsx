@@ -3,9 +3,16 @@
 import { useEffect, useState } from "react";
 import { motion, useMotionValue, AnimatePresence } from "framer-motion";
 
+interface Ripple {
+  id: number;
+  x: number;
+  y: number;
+}
+
 export default function CustomCursor() {
   const [isDesktop, setIsDesktop] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [ripples, setRipples] = useState<Ripple[]>([]);
 
   // Direct motion values for 1:1 movement (no lag)
   const mouseX = useMotionValue(-100);
@@ -24,8 +31,18 @@ export default function CustomCursor() {
       mouseY.set(e.clientY);
     };
 
+    const handleMouseDown = (e: MouseEvent) => {
+      const newRipple = {
+        id: Date.now() + Math.random(),
+        x: e.clientX,
+        y: e.clientY
+      };
+      setRipples(prev => [...prev, newRipple]);
+    };
+
     if (isDesktop) {
       window.addEventListener("mousemove", moveMouse);
+      window.addEventListener("mousedown", handleMouseDown);
       
       // Hide default cursor
       document.body.style.cursor = "none";
@@ -39,6 +56,7 @@ export default function CustomCursor() {
     return () => {
       window.removeEventListener("mousemove", moveMouse);
       window.removeEventListener("resize", checkDevice);
+      window.removeEventListener("mousedown", handleMouseDown);
       document.body.style.cursor = "auto";
     };
   }, [isDesktop, isVisible, mouseX, mouseY]);
@@ -46,7 +64,23 @@ export default function CustomCursor() {
   if (!isDesktop) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[9999]">
+    <div className="fixed inset-0 pointer-events-none z-[9999] overflow-hidden">
+      {/* Background trail lighting effect */}
+      <AnimatePresence>
+        {isVisible && (
+          <motion.div
+            style={{
+              x: mouseX,
+              y: mouseY,
+              left: 8,
+              top: 8,
+            }}
+            className="absolute w-36 h-36 bg-cyan-500/5 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Main Cursor Tip */}
       <AnimatePresence>
         {isVisible && (
           <motion.div
@@ -94,6 +128,26 @@ export default function CustomCursor() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Click Ripples */}
+      {ripples.map((ripple) => (
+        <motion.div
+          key={ripple.id}
+          initial={{ scale: 0.15, opacity: 0.8 }}
+          animate={{ scale: 3.2, opacity: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          onAnimationComplete={() => {
+            setRipples(prev => prev.filter(r => r.id !== ripple.id));
+          }}
+          style={{
+            left: ripple.x,
+            top: ripple.y,
+            x: "-50%",
+            y: "-50%",
+          }}
+          className="absolute w-8 h-8 rounded-full border border-[#00fbfb] shadow-[0_0_12px_rgba(0,251,251,0.5),inset_0_0_8px_rgba(0,251,251,0.3)] pointer-events-none"
+        />
+      ))}
     </div>
   );
 }

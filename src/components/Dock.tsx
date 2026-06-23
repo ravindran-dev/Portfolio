@@ -26,7 +26,7 @@ export default function Dock() {
       initial={{ y: 100 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.5 }}
-      className="fixed bottom-4 left-1/2 -translate-x-1/2 backdrop-blur-xl bg-white/5 border border-white/20 shadow-2xl px-4 py-2 rounded-2xl flex items-center gap-3 z-[8000]"
+      className="fixed bottom-4 left-1/2 -translate-x-1/2 backdrop-blur-xl bg-white/5 border border-white/20 shadow-2xl px-4 py-2 rounded-2xl flex items-center gap-3 z-30"
     >
       {/* App Finder Button */}
       <button 

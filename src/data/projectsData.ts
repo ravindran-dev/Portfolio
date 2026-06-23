@@ -2,13 +2,13 @@ export const projectsData = {
   "AirMouse3D": {
     title: "AirMouse3D",
     description: "3D Air Mouse Using Smartphone Motion Sensors",
-    tech: ["Rust", "Python", "Firebase", "Kotlin", "Android Sensor API"],
+    tech: ["Rust", "Python", "Firebase", "Mobile Sensors"],
     github: "https://github.com/ravindran-dev/AirMouse3D",
     content: `
 # 3D Air Mouse Using Smartphone Motion Sensors
 
 ## Project Overview
-The **3D Air Mouse** project enables a smartphone to act as a wireless mouse for a PC using built-in motion sensors. Instead of traditional mouse hardware, the system captures hand movements via the phone’s gyroscope and accelerometer and translates them into real-time cursor movements and mouse actions on a computer.
+The **3D Air Mouse** project enables a smartphone to act as a wireless mouse for a PC using built-in motion sensors. Instead of traditional mouse hardware, the system captures hand movements via the phone’s gyroscope and accelerometer and translates them into real-time cursor movements and mouse actions on a computer with 90% precision.
 
 The project uses a **session-based pairing mechanism** and **Firebase Realtime Database** for communication between the mobile device and the PC. A Rust-based PC receiver listens to motion updates and controls the cursor using operating system–level APIs.
 
@@ -51,12 +51,12 @@ OS-Level Mouse Control
   "GenuineGate": {
     title: "GenuineGate",
     description: "Real-time anti-scalping bot protection MVP",
-    tech: ["Go", "Redis", "Nginx", "JavaScript", "Gin"],
+    tech: ["Go", "Redis", "Nginx", "JavaScript"],
     github: "https://github.com/ravindran-dev/GenuineGate",
     content: `
 # GenuineGate
 > **Real-time anti-scalping bot protection MVP**  
-> Detect automated bots during high-traffic product drops using behavioral analysis
+> Detect automated bots during high-traffic product drops using behavioral analysis and session scoring, achieving ~93% detection accuracy.
 
 **Architecture:** Browser Tracker → Nginx → Go API → Redis → Admin Dashboard
 
@@ -81,13 +81,13 @@ GenuineGate protects checkout flows by analyzing user behavior in real-time:
   "MachineGuard": {
     title: "MachineGuard",
     description: "AI-powered industrial monitoring platform",
-    tech: ["Kotlin", "Python", "MQTT", "Firebase", "IoT", "Jetpack Compose"],
+    tech: ["Kotlin", "Python", "MQTT", "Firebase", "IoT Sensors"],
     content: `
 # Machine-Guard-AI
-An AI-powered, sustainable industrial monitoring platform combining IoT, machine learning, and autonomous decision-making.
+An AI-powered, sustainable industrial monitoring platform combining IoT, machine learning, and autonomous decision-making. Official submission at Ti Forge 2026.
 
 ## Project Overview
-Machine-Guard-AI is an end-to-end industrial intelligence system designed to transform industries from reactive monitoring to autonomous, predictive, and sustainable operations.
+Machine-Guard-AI is an end-to-end industrial intelligence system designed to transform industries from reactive monitoring to autonomous, predictive, and sustainable operations with ~94% model accuracy.
 
 The platform integrates:
 - **IoT Hardware**: ESP32-based real-time sensing (temperature, vibration, gas, power)
@@ -110,20 +110,20 @@ The platform integrates:
   "MicroDet": {
     title: "MicroDet",
     description: "Lightweight Drone-Based Object Detection",
-    tech: ["PyTorch", "TensorRT", "TinyGrad", "OpenCV"],
+    tech: ["TinyGrad", "PyTorch", "DeepStream SDK", "TensorRT"],
     content: `
 # MicroDet – Lightweight Drone-Based Object Detection
-A lightweight, anchor-free object detection system built using MicroDet, optimized for aerial / drone imagery.
+A lightweight, anchor-free object detection system built using MicroDet, optimized for aerial / drone imagery. Presented at NIDAR 2025.
 
 ## Executive Summary
 MicroDet delivers efficient, anchor-free person detection for drone imagery with a practical train-validate-infer pipeline.
-The repository is designed for experimentation speed, stable training behavior, and deployment-friendly inference.
+It achieves 96% accuracy and enables real-time on-device inference using distributed computing.
 
 ## Model Overview
-MicroDet is a one-stage, anchor-free detector designed for speed and efficiency.
+MicroDet is a one-stage, anchor-free detector designed for speed and efficiency (<1 GFLOP) using a NanoDet backbone with YOLO-style heads.
 
 ### Architecture
-- **Backbone**: Lightweight CNN for feature extraction
+- **Backbone**: Lightweight CNN for feature extraction (NanoDet)
 - **Neck**: Multi-scale feature aggregation
 - **Head**: Classification branch (Quality Focal Loss) & Regression branch (DFL)
 
@@ -142,6 +142,7 @@ MicroDet is a one-stage, anchor-free detector designed for speed and efficiency.
     tech: ["React", "Flask", "MongoDB", "Scikit-learn", "XGBoost", "PyTorch", "LangChain (RAG)"],
     content: `
 # AI-Driven Life Cycle Assessment (LCA) Tool for Mining & Metallurgy
+First Place Winner at the AI for Sustainability Hackathon.
 
 ## Problem Statement
 Mining and metallurgy industries are resource-intensive and generate significant environmental impacts. Traditional methods are manual and complex.
@@ -167,10 +168,10 @@ Our solution leverages **AI and data-driven models** to:
   "AISoftSkill": {
     title: "AI Soft Skill Coach",
     description: "AI-powered interview preparation tool",
-    tech: ["Python", "Agentic AI", "LLMs", "React", "Firebase"],
+    tech: ["Python", "Agentic AI", "React", "Firebase"],
     content: `
 # AI Soft Skill Coach
-An AI-powered interview preparation tool that parses candidate resumes and generates personalised, role-specific mock-interview questions using large language models (LLMs).
+An AI-powered interview preparation tool that parses candidate resumes and generates personalised, role-specific mock-interview questions using large language models (LLMs). Developed for TGF 2.0 2026.
 
 ## Features
 - **Resume Parsing**: Automatically extracts skills and experience from uploaded PDFs.

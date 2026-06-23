@@ -4,17 +4,17 @@ import { motion } from "framer-motion";
 
 const skills = [
   { name: "Python", value: 95 },
-  { name: "React", value: 90 },
-  { name: "MachineLearning", value: 95 },
+  { name: "PyTorch", value: 94 },
+  { name: "React.js", value: 90 },
+  { name: "ComputerVision", value: 95 },
+  { name: "GenerativeAI_LLMs", value: 92 },
+  { name: "GPU_Optimization", value: 88 },
+  { name: "TypeScript", value: 92 },
+  { name: "Go", value: 88 },
+  { name: "Rust", value: 82 },
+  { name: "C_C++", value: 85 },
   { name: "Linux", value: 96 },
-  { name: "Go", value: 85 },
-  { name: "Rust", value: 80 },
-  { name: "PyTorch", value: 92 },
-  { name: "Docker", value: 88 },
-  { name: "AWS", value: 85 },
-  { name: "FastAPI", value: 90 },
-  { name: "Node.js", value: 85 },
-  { name: "TypeScript", value: 92 }
+  { name: "Docker", value: 90 }
 ];
 
 export default function Skills() {
@@ -41,7 +41,7 @@ export default function Skills() {
           </div>
         ))}
       </div>
-      <div><span className="text-blue-400">{"{"}</span></div>
+      <div><span className="text-blue-400">{"}"}</span></div>
     </div>
   );
 }

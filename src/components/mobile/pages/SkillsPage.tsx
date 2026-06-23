@@ -4,30 +4,39 @@ import { motion } from 'framer-motion';
 
 const skillsGroups = [
   {
-    title: "Languages",
+    title: "Programming Languages",
     items: [
       { name: "Python", value: 95 },
-      { name: "Go", value: 85 },
-      { name: "Rust", value: 80 },
-      { name: "TypeScript", value: 92 }
+      { name: "TypeScript", value: 92 },
+      { name: "Go", value: 88 },
+      { name: "Rust", value: 82 },
+      { name: "C/C++", value: 85 },
+      { name: "SQL & Lua", value: 80 }
     ]
   },
   {
-    title: "Frameworks & Tools",
+    title: "Frameworks & Libraries",
     items: [
-      { name: "React", value: 90 },
-      { name: "FastAPI", value: 90 },
-      { name: "Node.js", value: 85 },
-      { name: "Docker", value: 88 },
-      { name: "AWS", value: 85 },
-      { name: "Linux", value: 96 }
+      { name: "PyTorch", value: 94 },
+      { name: "React.js", value: 90 },
+      { name: "Streamlit", value: 85 }
     ]
   },
   {
-    title: "AI & Machine Learning",
+    title: "Core Skills",
     items: [
-      { name: "Machine Learning", value: 95 },
-      { name: "PyTorch", value: 92 }
+      { name: "Computer Vision & Deep Learning", value: 95 },
+      { name: "Generative AI (LLMs, RAG)", value: 92 },
+      { name: "GPU Optimization & MLOps", value: 88 },
+      { name: "Distributed Systems & Multithreading", value: 85 }
+    ]
+  },
+  {
+    title: "Platforms & Tools",
+    items: [
+      { name: "Linux", value: 96 },
+      { name: "Git & GitHub", value: 92 },
+      { name: "Docker & Containerization", value: 90 }
     ]
   }
 ];
